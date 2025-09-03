@@ -36,7 +36,7 @@ export const getEstatistica = async () : Promise<EstatisticaPessoaDTO> => {
     }
 }
 
-export const getPessoaById = async (id: number): Promise<PessoaDetalhes> => {
+export const getPessoaById = async (id: number): Promise<PessoaResumo> => {
     try {
         const response = await api.get(`/v1/pessoas/${id}`);
         return response.data;

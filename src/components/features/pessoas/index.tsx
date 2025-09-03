@@ -4,7 +4,6 @@ import type { PessoaResumo } from '@/types';
 import { formataNome } from '@/utils/formatter';
 import Avatar from './Avatar';
 import InfoItem from './InfoItem';
-import Link from 'next/link';
 
 interface PessoaCardProps {
     pessoa: PessoaResumo;
