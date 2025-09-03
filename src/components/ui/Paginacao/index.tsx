@@ -45,15 +45,12 @@ const getPaginationNumbers = (totalPages: number, currentPage: number, maxButton
 
 const Paginacao: React.FC<PaginacaoProps> = ({ totalPages, currentPage, onPageChange }) => {
     const paginationNumbers = getPaginationNumbers(totalPages, currentPage);
-
-    // Estilos organizados para clareza
     const baseButtonStyles = "rounded-md py-2 px-4 text-base transition-colors duration-200 cursor-pointer";
     const inactiveButtonStyles = "bg-transparent text-gray-600 border border-gray-300 hover:bg-gray-100 hover:border-gray-400";
     const activeButtonStyles = "bg-blue-100 text-blue-700 border-blue-600 font-bold shadow-sm";
     const navButtonStyles = "bg-transparent text-gray-600 border border-gray-300 disabled:cursor-not-allowed disabled:text-gray-400 disabled:border-gray-200 hover:enabled:bg-gray-100";
 
     return (
-        // A CORREÇÃO ESTÁ TODA NESTA LINHA ABAIXO
         <div className="flex justify-center items-center flex-wrap fixed bottom-0 left-0 w-full bg-white border-t p-2.5 gap-1 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] z-30 md:relative md:w-auto md:bg-transparent md:border-none md:shadow-none md:z-auto md:mt-8 md:gap-2">
             
             <button onClick={() => onPageChange(1)} disabled={currentPage === 1} className={clsx(baseButtonStyles, navButtonStyles)}>
