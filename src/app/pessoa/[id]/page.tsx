@@ -12,7 +12,7 @@ const ArrowLeftIcon = () => (
     </svg>
 );
 
-export default async function PessoaDetalhePage({ params }: { params: { id: string } }) {
+export default async function PessoaDetalhePage({ params }: { params: Promise<{ id: string }> }) {
 
     const pessoa = await getPessoaById(Number((await (params)).id));
     const isLocalizada = !! (await pessoa).ultimaOcorrencia?.dataLocalizacao;
