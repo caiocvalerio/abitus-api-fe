@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getPessoas } from '../services/pessoaService';
-import type { FiltrosBusca, PagePessoa, PessoaResumo } from '../types';
+import type { FiltrosBusca, PagePessoa } from '../types';
 
 export const usePessoas = (filtros: FiltrosBusca, pagina: number, initialData: PagePessoa | null = null) => {
     const [pageData, setPageData] = useState<PagePessoa | null>(initialData);

@@ -15,13 +15,11 @@ const LinkIcon = () => (
     </svg>
 );
 
+export default async function PessoaDetalhePage({ params }: { params: Promise<{ id: string }> }) {
 
-
-export default async function PessoaDetalhePage({ params }: { params: { id: string } }) {
-
-    const pessoa = await getPessoaById(Number(params.id));
-    const ocorrencia = pessoa.ultimaOcorrencia;
-    const isLocalizada = !!pessoa.ultimaOcorrencia?.dataLocalizacao;
+    const pessoa = await getPessoaById(Number((await (params)).id));
+    const ocorrencia = (await pessoa).ultimaOcorrencia;
+    const isLocalizada = !! (await pessoa).ultimaOcorrencia?.dataLocalizacao;
     const status = isLocalizada ? 'Localizada' : 'Desaparecida';
     const tagClasses = isLocalizada ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
 
