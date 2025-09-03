@@ -7,7 +7,6 @@ import { useEstatistica } from "@/hooks/useEstatistica";
 import type { FiltrosBusca, PagePessoa } from "@/types";
 import MenuLateral from "@/components/layout/MenuLateral";
 import Paginacao from "@/components/ui/Paginacao";
-import ErrorMessage from "@/components/ui/ErrorMessage";
 import Estatisticas from "@/components/features/estatistica";
 import PessoaCard from "@/components/features/pessoas";
 import LoadingOverlay from "@/components/ui/LoadingOverlay";

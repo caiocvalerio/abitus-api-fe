@@ -1,4 +1,4 @@
-import { EstatisticaPessoaDTO, PagePessoa, PessoaDetalhes, PessoaResumo, PessoaSearchParams } from "@/types";
+import { EstatisticaPessoaDTO, PagePessoa, PessoaResumo, PessoaSearchParams } from "@/types";
 import api from "./api";
 import axios from "axios";
 

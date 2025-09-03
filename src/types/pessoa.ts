@@ -13,23 +13,6 @@ export interface PessoaResumo {
     ultimaOcorrencia?: Ocorrencia;
 }
 
-//PessoaDto
-export interface PessoaDetalhes {
-    id: number;
-    nome: string;
-    mae?: string;
-    pai?: string;
-    dtNascimento?: string;
-    idade?: number;
-    sexo?: 'MASCULINO' | 'FEMININO';
-    vivo?: boolean;
-    urlFoto?: string;
-    cpfCnpj?: string;
-    rgNumero?: string;
-    ultimaOcorrencia?: Ocorrencia; // Mantemos a ocorrência
-}
-
-
 export type PagePessoa = Page<PessoaResumo>;
 
 export interface PessoaSearchParams {
