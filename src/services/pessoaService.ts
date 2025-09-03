@@ -1,5 +1,6 @@
 import { EstatisticaPessoaDTO, PagePessoa, PessoaDetalhes, PessoaResumo, PessoaSearchParams } from "@/types";
 import api from "./api";
+import axios from "axios";
 
 export const getPessoas = async (params: PessoaSearchParams): Promise<PagePessoa> => {
     try {
@@ -21,7 +22,15 @@ export const getPessoas = async (params: PessoaSearchParams): Promise<PagePessoa
 
         return response.data;
     } catch (error) {
-        console.log("[ERROR] Falha ao buscar pessoas: " + error);
+        console.log("[ERROR] Falha ao buscar pessoas: ", error);
+
+        if (axios.isAxiosError(error) && error.response) {
+            if (error.response.status === 404) {
+                return { content: [], totalPages: 0 }; 
+            }
+            throw new Error('O servidor parece estar com problemas. Tente novamente mais tarde.');
+        }
+        
         throw new Error('Não foi possível carregar a lista de pessoas');
     }
 }

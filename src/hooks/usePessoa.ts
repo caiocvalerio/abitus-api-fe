@@ -3,11 +3,11 @@
 import { useState, useEffect } from 'react';
 import { getPessoas } from '../services/pessoaService';
 import type { FiltrosBusca, PagePessoa } from '../types';
+import toast from 'react-hot-toast';
 
 export const usePessoas = (filtros: FiltrosBusca, pagina: number, initialData: PagePessoa | null = null) => {
     const [pageData, setPageData] = useState<PagePessoa | null>(initialData);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const isInitialLoad = pagina === 1 && Object.keys(filtros).length === 0;
@@ -18,7 +18,6 @@ export const usePessoas = (filtros: FiltrosBusca, pagina: number, initialData: P
 
         const fetchPessoas = async () => {
             setIsLoading(true);
-            setError(null);
 
             try {
                 const params = {
@@ -75,9 +74,9 @@ export const usePessoas = (filtros: FiltrosBusca, pagina: number, initialData: P
 
             } catch (err) {
                 if (err instanceof Error) {
-                    setError(err.message);
+                    toast.error(err.message);
                 } else {
-                    setError('Ocorreu um erro inesperado');
+                    toast.error('Ocorreu um erro inesperado.');
                 }
             } finally {
                 setIsLoading(false);
@@ -87,5 +86,5 @@ export const usePessoas = (filtros: FiltrosBusca, pagina: number, initialData: P
         fetchPessoas();
     }, [filtros, pagina, initialData]);
 
-    return { pageData, isLoading, error };
+    return { pageData, isLoading };
 };
