@@ -63,7 +63,7 @@ const MenuLateral: React.FC<PropsMenuLateral> = (props) => {
                     {/* Logo para Desktop */}
                     <div className="hidden lg:flex items-center gap-4 mb-6">
                         <div className="flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-12 text-desenvolve-blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-12 text-blue-950">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                             </svg>
                         </div>
@@ -84,7 +84,7 @@ const MenuLateral: React.FC<PropsMenuLateral> = (props) => {
 
                     {/* Botão de Busca Avançada com Divisória */}
                     <div className="w-full border-t border-gray-200 mt-6">
-                        <button onClick={() => setFiltrosVisiveis(!filtrosVisiveis)} className="w-full flex justify-between items-center py-4 text-left font-semibold text-gray-700 hover:text-desenvolve-blue transition-colors">
+                        <button onClick={() => setFiltrosVisiveis(!filtrosVisiveis)} className="w-full flex justify-between items-center py-4 text-left font-semibold text-gray-700 hover:text-blue-950 transition-colors">
                             Busca Avançada
                             <ChevronIcon className={clsx("w-4 h-4 transition-transform duration-300", { 'rotate-180': filtrosVisiveis })} />
                         </button>

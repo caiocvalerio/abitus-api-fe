@@ -28,7 +28,7 @@ export default async function PessoaDetalhePage({ params }: { params: Promise<{ 
             <div className="container mx-auto p-4 sm:p-6 md:p-8">
 
                 <div className="mb-6">
-                    <Link href="/" className="inline-flex items-center text-desenvolve-blue font-semibold hover:underline">
+                    <Link href="/" className="inline-flex items-center text-blue-950 font-semibold hover:underline">
                         <ArrowLeftIcon />
                         Voltar para a busca
                     </Link>
@@ -138,7 +138,7 @@ export default async function PessoaDetalhePage({ params }: { params: Promise<{ 
 
                     {/* Botão para Adicionar Informação */}
                     <div className="mt-8 pt-6 border-t border-gray-200">
-                        <button className="w-full h-12 flex items-center justify-center gap-2 rounded-lg text-base cursor-pointer border-none bg-gradient-to-r from-desenvolve-blue-secondary to-desenvolve-blue-dark text-white font-semibold shadow-md hover:shadow-lg hover:-translate-y-px transition-all">
+                        <button className="w-full h-12 flex items-center justify-center gap-2 rounded-lg text-base cursor-pointer border-none bg-blue-950 text-white font-semibold shadow-md hover:bg-blue-800 hover:-translate-y-px transition-all">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="size-5">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                             </svg>
