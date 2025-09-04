@@ -64,12 +64,6 @@ export const usePessoas = (filtros: FiltrosBusca, pagina: number, initialData: P
                         });
                     }
 
-                    // Filtro de segurança para VIVO
-                    if (filtros.vivo && filtros.vivo !== 'todos') {
-                        const estaVivo = filtros.vivo === 'true';
-                        refinedContent = refinedContent.filter(pessoa => pessoa.vivo === estaVivo);
-                    }
-
                     setPageData({ ...data, content: refinedContent });
                 } else {
                     setPageData(data);
