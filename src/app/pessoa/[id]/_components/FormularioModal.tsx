@@ -5,12 +5,16 @@ import { AnimatePresence, motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { adicionarInformacaoOcorrencia } from '@/services/pessoaService';
 
-const CloseIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>;
-
 interface FormularioModalProps {
     isOpen: boolean;
     onClose: () => void;
     ocoId: number | undefined;
+}
+
+const CloseIcon = (): JSX.Element =>{
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+    );
 }
 
 const FormularioModal = ({ isOpen, onClose, ocoId }: FormularioModalProps): JSX.Element => {
