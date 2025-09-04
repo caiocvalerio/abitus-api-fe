@@ -1,4 +1,4 @@
-import { EstatisticaPessoaDTO, PagePessoa, PessoaResumo, PessoaSearchParams } from "@/types";
+import { AdicionarInformacaoPayload, EstatisticaPessoaDTO, PagePessoa, PessoaResumo, PessoaSearchParams } from "@/types";
 import api from "./api";
 import axios from "axios";
 
@@ -54,3 +54,37 @@ export const getPessoaById = async (id: number): Promise<PessoaResumo> => {
         throw new Error('Não foi possível carregar os detalhes da pessoa.');
     }
 }
+
+
+export const adicionarInformacaoOcorrencia = async (payload: AdicionarInformacaoPayload) => {
+    const formData = new FormData();
+
+    formData.append('ocoId', String(payload.ocoId));
+    formData.append('informacao', payload.informacao);
+    formData.append('data', payload.data);
+    formData.append('descricao', payload.descricao);
+
+    if (payload.files) {
+        for (let i = 0; i < payload.files.length; i++) {
+            formData.append('files', payload.files[i]);
+        }
+    }
+
+    try {
+        const response = await fetch('/api/informacao', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Falha na requisição');
+        }
+
+        return await response.json();
+
+    } catch (error) {
+        console.error("[ERROR] Falha ao adicionar informação:", error);
+        throw error;
+    }
+};

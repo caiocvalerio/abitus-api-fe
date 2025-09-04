@@ -28,3 +28,12 @@ export interface Ocorrencia {
     ocoId?: number;
 }
 
+
+export interface AdicionarInformacaoPayload {
+    ocoId: number;
+    informacao: string;
+    data: string;
+    descricao: string;
+    files: FileList | null;
+}
+
