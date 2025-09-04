@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import type { PessoaResumo } from "@/types";
 import Link from "next/link";
