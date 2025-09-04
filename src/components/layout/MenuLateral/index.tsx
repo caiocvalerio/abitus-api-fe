@@ -30,13 +30,18 @@ const MenuLateral = (props: PropsMenuLateral): JSX.Element => {
 
     const { menuAberto, setMenuAberto } = props;
 
+    const handleFormSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        handleBuscaClick();
+    };
+
     return (
         <>
             {/* Cabeçalho Fixo para Mobile */}
             <header className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white shadow-md p-4 flex justify-between items-center">
                 <h1 className="text-xl font-bold text-gray-800">SBPD</h1>
                 <button onClick={() => setMenuAberto(true)} className="p-2" aria-label="Abrir menu de filtros">
-                    <MenuIcon/>
+                    <MenuIcon />
                 </button>
             </header>
 
@@ -53,59 +58,59 @@ const MenuLateral = (props: PropsMenuLateral): JSX.Element => {
                 { 'translate-x-0': menuAberto },
                 "lg:relative lg:translate-x-0 lg:h-auto lg:shadow-md lg:overflow-y-visible"
             )}>
-                <div className="flex flex-col w-full flex-grow">
+                <form onSubmit={handleFormSubmit} className="flex flex-col w-full h-full">
+                    <div className="flex flex-col w-full flex-grow">
 
-                    {/* Cabeçalho do menu mobile com botão de fechar */}
-                    <div className="flex justify-between items-center lg:hidden mb-6">
-                        <button onClick={() => setMenuAberto(false)} className="p-2" aria-label="Fechar menu">
-                            <CloseIcon />
-                        </button>
-                    </div>
-                    
-                    {/* Logo para Desktop */}
-                    <div className="hidden lg:flex items-center gap-4 mb-6">
-                        <div className="flex-shrink-0">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-12 text-blue-950">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg>
+                        {/* Cabeçalho do menu mobile com botão de fechar */}
+                        <div className="flex justify-between items-center lg:hidden mb-6">
+                            <button onClick={() => setMenuAberto(false)} className="p-2" aria-label="Fechar menu">
+                                <CloseIcon />
+                            </button>
                         </div>
-                        <div>
-                            <h1 className="text-2xl font-bold text-slate-800 tracking-wide leading-tight">SBPD</h1>
-                            <p className="text-xs text-slate-500 leading-tight">Consulte registros de pessoas desaparecidas e localizadas.</p>
+
+                        {/* Logo para Desktop */}
+                        <div className="hidden lg:flex items-center gap-4 mb-6">
+                            <div className="flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-12 text-blue-950">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h1 className="text-2xl font-bold text-slate-800 tracking-wide leading-tight">SBPD</h1>
+                                <p className="text-xs text-slate-500 leading-tight">Consulte registros de pessoas desaparecidas e localizadas.</p>
+                            </div>
                         </div>
+
+                        {/* Input de Busca por Nome */}
+                        <input
+                            type="text"
+                            placeholder="Buscar por nome..."
+                            value={termoBusca}
+                            onChange={(e) => setTermoBusca(e.target.value)}
+                            className="w-full p-3 border border-gray-300 rounded-lg text-base bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+
+                        {/* Botão de Busca Avançada com Divisória */}
+                        <div className="w-full border-t border-gray-200 mt-6">
+                            <button onClick={() => setFiltrosVisiveis(!filtrosVisiveis)} className="w-full flex justify-between items-center py-4 text-left font-semibold text-gray-700 hover:text-blue-950 transition-colors">
+                                Busca Avançada
+                                <ChevronIcon className={clsx("w-4 h-4 transition-transform duration-300", { 'rotate-180': filtrosVisiveis })} />
+                            </button>
+                        </div>
+
+                        {/* Componente dos Filtros */}
+                        <FiltrosAvancados
+                            visivel={filtrosVisiveis}
+                            filtros={filtrosAvancados}
+                            onFiltroChange={handleFiltroChange}
+                        />
+
+                        <BotoesAcao
+                            onLimpar={handleLimparClick}
+                            onBuscar={handleBuscaClick}
+                        />
                     </div>
-
-                    {/* Input de Busca por Nome */}
-                    <input
-                        type="text"
-                        placeholder="Buscar por nome..."
-                        value={termoBusca}
-                        onChange={(e) => setTermoBusca(e.target.value)}
-                        className="w-full p-3 border border-gray-300 rounded-lg text-base bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-
-                    {/* Botão de Busca Avançada com Divisória */}
-                    <div className="w-full border-t border-gray-200 mt-6">
-                        <button onClick={() => setFiltrosVisiveis(!filtrosVisiveis)} className="w-full flex justify-between items-center py-4 text-left font-semibold text-gray-700 hover:text-blue-950 transition-colors">
-                            Busca Avançada
-                            <ChevronIcon className={clsx("w-4 h-4 transition-transform duration-300", { 'rotate-180': filtrosVisiveis })} />
-                        </button>
-                    </div>
-
-                    {/* Componente dos Filtros */}
-                    <FiltrosAvancados 
-                        visivel={filtrosVisiveis}
-                        filtros={filtrosAvancados}
-                        onFiltroChange={handleFiltroChange}
-                    />
-
-                    <BotoesAcao 
-                        onLimpar={handleLimparClick}
-                        onBuscar={handleBuscaClick}
-                    />
-                </div>
-                
-                
+                </form>
             </aside>
         </>
     );
