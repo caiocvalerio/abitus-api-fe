@@ -1,5 +1,4 @@
 import type { Ocorrencia } from "@/types";
-import Link from "next/link";
 
 const LinkIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 ml-2 opacity-60">
