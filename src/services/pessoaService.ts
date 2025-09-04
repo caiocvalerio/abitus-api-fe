@@ -1,4 +1,4 @@
-import { AdicionarInformacaoPayload, EstatisticaPessoaDTO, PagePessoa, PessoaResumo, PessoaSearchParams } from "@/types";
+import { AdicionarInformacaoPayload, EstatisticaPessoaDTO, OcorrenciaInformacao, PagePessoa, PessoaResumo, PessoaSearchParams } from "@/types";
 import api from "./api";
 import axios from "axios";
 
@@ -56,7 +56,7 @@ export const getPessoaById = async (id: number): Promise<PessoaResumo> => {
 }
 
 
-export const adicionarInformacaoOcorrencia = async (payload: AdicionarInformacaoPayload) => {
+export const adicionarInformacaoOcorrencia = async (payload: AdicionarInformacaoPayload): Promise<OcorrenciaInformacao> => {
     const formData = new FormData();
 
     formData.append('ocoId', String(payload.ocoId));

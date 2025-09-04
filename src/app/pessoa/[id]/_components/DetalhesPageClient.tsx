@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { JSX, useState } from "react";
 import type { PessoaResumo } from "@/types";
 import Link from "next/link";
 import DetalheHeader from "./DetalheHeader";
@@ -16,7 +16,7 @@ const ArrowLeftIcon = () => (
 );
 
 
-export default function DetalhesPageClient({ pessoa }: { pessoa: PessoaResumo }) {
+export default function DetalhesPageClient({ pessoa }: { pessoa: PessoaResumo }): JSX.Element {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     if (!pessoa) {

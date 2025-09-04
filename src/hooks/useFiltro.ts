@@ -7,7 +7,18 @@ interface UseFiltrosProps {
     setMenuAberto: (aberto: boolean) => void;
 }
 
-export const useFiltros = ({ onBusca, onLimpar, setMenuAberto }: UseFiltrosProps) => {
+type UseFiltrosReturn = {
+    termoBusca: string;
+    setTermoBusca: React.Dispatch<React.SetStateAction<string>>;
+    filtrosVisiveis: boolean;
+    setFiltrosVisiveis: React.Dispatch<React.SetStateAction<boolean>>;
+    filtrosAvancados: FiltrosAvancadosData;
+    handleFiltroChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+    handleBuscaClick: () => void;
+    handleLimparClick: () => void;
+};
+
+export const useFiltros = ({ onBusca, onLimpar, setMenuAberto }: UseFiltrosProps): UseFiltrosReturn => {
     const [termoBusca, setTermoBusca] = useState('');
     const [filtrosVisiveis, setFiltrosVisiveis] = useState(false);
     const [filtrosAvancados, setFiltrosAvancados] = useState<FiltrosAvancadosData>({
@@ -32,7 +43,7 @@ export const useFiltros = ({ onBusca, onLimpar, setMenuAberto }: UseFiltrosProps
         const { name, value } = e.target;
         setFiltrosAvancados(prev => ({ ...prev, [name]: value }));
     };
-    
+
     return {
         termoBusca,
         setTermoBusca,

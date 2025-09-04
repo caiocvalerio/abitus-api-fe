@@ -1,10 +1,12 @@
 import type { PessoaResumo } from "@/types";
+import { JSX } from "react";
 
 interface InfoPessoaisProps {
     pessoa: PessoaResumo;
 }
 
-const InfoPessoais: React.FC<InfoPessoaisProps> = ({ pessoa }) => (
+
+const InfoPessoais = ({pessoa} : InfoPessoaisProps): JSX.Element => (
     <div>
         <h2 className="text-2xl font-bold text-slate-800 mb-4">Informações Pessoais</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-slate-700">

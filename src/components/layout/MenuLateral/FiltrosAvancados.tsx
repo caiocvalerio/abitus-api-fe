@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import FiltroAccordion from './FiltroAccordion';
 import clsx from 'clsx';
 import { FiltrosAvancadosData } from '@/types';
@@ -9,7 +9,7 @@ interface FiltrosAvancadosProps {
     onFiltroChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 }
 
-const FiltrosAvancados: React.FC<FiltrosAvancadosProps> = ({ visivel, filtros, onFiltroChange }) => {
+const FiltrosAvancados = ({ visivel, filtros, onFiltroChange }: FiltrosAvancadosProps): JSX.Element => {
     const inputStyles = "w-full p-3 border border-gray-300 rounded-lg text-base bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow";
     const inputIdadeStyles = "mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm p-2 focus:ring-blue-500 focus:border-blue-500";
 

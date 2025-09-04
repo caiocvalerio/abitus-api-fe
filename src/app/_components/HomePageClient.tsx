@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, JSX } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePessoas } from "@/hooks/usePessoa";
 import { useEstatistica } from "@/hooks/useEstatistica";
@@ -12,7 +12,7 @@ import PessoaCard from "@/components/features/pessoas";
 import LoadingOverlay from "@/components/ui/LoadingOverlay";
 import Link from "next/link";
 
-export default function HomePageClient({ initialPageData }: { initialPageData: PagePessoa }) {
+export default function HomePageClient({ initialPageData }: { initialPageData: PagePessoa }): JSX.Element {
     const [currentPage, setCurrentPage] = useState(1);
     const [filtros, setFiltros] = useState<FiltrosBusca>({});
     const [menuAberto, setMenuAberto] = useState(false);

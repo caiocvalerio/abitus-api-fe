@@ -1,4 +1,5 @@
 import type { Ocorrencia } from "@/types";
+import { JSX } from "react";
 
 const LinkIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 ml-2 opacity-60">
@@ -11,7 +12,7 @@ interface InfoOcorrenciaProps {
     isLocalizada: boolean;
 }
 
-const InfoOcorrencia: React.FC<InfoOcorrenciaProps> = ({ ocorrencia, isLocalizada }) => (
+const InfoOcorrencia = ({ocorrencia, isLocalizada}: InfoOcorrenciaProps): JSX.Element => (
     <div className="mt-6 pt-6 border-t border-gray-200">
         <h2 className="text-2xl font-bold text-slate-800 mb-4">Detalhes do Desaparecimento</h2>
         {ocorrencia ? (

@@ -6,6 +6,7 @@ import FiltrosAvancados from "./FiltrosAvancados";
 import BotoesAcao from "./BotoesAcao";
 import { useFiltros } from "@/hooks/useFiltro";
 import { ChevronIcon, CloseIcon, MenuIcon } from "./Icons";
+import { JSX } from "react";
 
 interface PropsMenuLateral {
     onBusca: (filtros: FiltrosBusca) => void;
@@ -14,7 +15,8 @@ interface PropsMenuLateral {
     setMenuAberto: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MenuLateral: React.FC<PropsMenuLateral> = (props) => {
+
+const MenuLateral = (props: PropsMenuLateral): JSX.Element => {
     const {
         termoBusca,
         setTermoBusca,

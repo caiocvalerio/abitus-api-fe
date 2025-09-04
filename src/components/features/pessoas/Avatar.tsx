@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { JSX, useState } from 'react';
 import Image from 'next/image';
 
 
@@ -9,7 +9,7 @@ interface AvatarProps {
     nome: string;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ fotoUrl, nome }) => {
+const Avatar = ({ fotoUrl, nome }: AvatarProps): JSX.Element => {
     const [imageError, setImageError] = useState(false);
     const iniciais = nome.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
 

@@ -2,8 +2,13 @@ import { getEstatistica } from "@/services/pessoaService";
 import { EstatisticaPessoaDTO } from "@/types";
 import { useEffect, useState } from "react";
 
+type UseEstatisticaReturn = {
+    stats: EstatisticaPessoaDTO | null;
+    isLoading: boolean;
+    error: string | null;
+}
 
-export const useEstatistica = () => {
+export const useEstatistica = (): UseEstatisticaReturn => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [stats, setStats] = useState<EstatisticaPessoaDTO | null>(null);

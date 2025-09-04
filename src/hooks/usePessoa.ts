@@ -1,11 +1,14 @@
-"use client";
-
 import { useState, useEffect } from 'react';
 import { getPessoas } from '../services/pessoaService';
 import type { FiltrosBusca, PagePessoa } from '../types';
 import toast from 'react-hot-toast';
 
-export const usePessoas = (filtros: FiltrosBusca, pagina: number, initialData: PagePessoa | null = null) => {
+type UsePessoaReturn = {
+    pageData: PagePessoa | null;
+    isLoading: boolean;
+}
+
+export const usePessoas = (filtros: FiltrosBusca, pagina: number, initialData: PagePessoa | null = null): UsePessoaReturn => {
     const [pageData, setPageData] = useState<PagePessoa | null>(initialData);
     const [isLoading, setIsLoading] = useState(false);
 

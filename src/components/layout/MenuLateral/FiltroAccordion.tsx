@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 
 const ChevronIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="size-4">
@@ -11,7 +11,7 @@ interface FiltroAccordionProps {
     children: React.ReactNode;
 }
 
-const FiltroAccordion: React.FC<FiltroAccordionProps> = ({ title, children }) => {
+const FiltroAccordion = ({ title, children }: FiltroAccordionProps): JSX.Element => {
     return (
         <details className="group overflow-hidden rounded-lg border border-gray-200 shadow-sm [&_summary::-webkit-details-marker]:hidden">
             <summary className="flex cursor-pointer items-center justify-between gap-2 p-4 text-gray-900 transition hover:bg-gray-50">
