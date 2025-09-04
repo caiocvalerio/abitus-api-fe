@@ -13,8 +13,8 @@ const Estatisticas = ({ stats, isLoading }: EstatisticasProps): JSX.Element => {
     if (isLoading || !stats) {
         return (
             <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                <div className="h-[92px] bg-gray-200 rounded-xl animate-pulse"></div>
-                <div className="h-[92px] bg-gray-200 rounded-xl animate-pulse"></div>
+                <div data-testid="loading-placeholder" className="h-[92px] bg-gray-200 rounded-xl animate-pulse"></div>
+                <div data-testid="loading-placeholder" className="h-[92px] bg-gray-200 rounded-xl animate-pulse"></div>
             </section>
         );
     }
