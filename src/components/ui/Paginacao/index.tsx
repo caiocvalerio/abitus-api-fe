@@ -1,7 +1,7 @@
 "use client";
 
-import React from 'react';
-import clsx from 'clsx'; 
+import React, { JSX } from 'react';
+import clsx from 'clsx';
 
 interface PaginacaoProps {
     totalPages: number;
@@ -9,7 +9,7 @@ interface PaginacaoProps {
     onPageChange: (page: number) => void;
 }
 
-const getPaginationNumbers = (totalPages: number, currentPage: number, maxButtons = 5) => {
+const getPaginationNumbers = (totalPages: number, currentPage: number, maxButtons = 5): Array<number | string> => {
     if (totalPages <= maxButtons) {
         return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
@@ -43,7 +43,7 @@ const getPaginationNumbers = (totalPages: number, currentPage: number, maxButton
     return pageNumbers;
 };
 
-const Paginacao: React.FC<PaginacaoProps> = ({ totalPages, currentPage, onPageChange }) => {
+const Paginacao = ({ totalPages, currentPage, onPageChange }: PaginacaoProps): JSX.Element => {
     const paginationNumbers = getPaginationNumbers(totalPages, currentPage);
     const baseButtonStyles = "rounded-md py-2 px-4 text-base transition-colors duration-200 cursor-pointer";
     const inactiveButtonStyles = "bg-transparent text-gray-600 border border-gray-300 hover:bg-gray-100 hover:border-gray-400";
@@ -52,7 +52,7 @@ const Paginacao: React.FC<PaginacaoProps> = ({ totalPages, currentPage, onPageCh
 
     return (
         <div className="flex justify-center items-center flex-wrap fixed bottom-0 left-0 w-full bg-white border-t p-2.5 gap-1 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] z-30 md:relative md:w-auto md:bg-transparent md:border-none md:shadow-none md:z-auto md:mt-8 md:gap-2">
-            
+
             <button onClick={() => onPageChange(1)} disabled={currentPage === 1} className={clsx(baseButtonStyles, navButtonStyles)}>
                 Primeira
             </button>

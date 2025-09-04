@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 
 interface EstatisticaCardProps {
     icon: React.ReactNode;
@@ -7,7 +7,7 @@ interface EstatisticaCardProps {
     color: 'red' | 'green';
 }
 
-const StatCard: React.FC<EstatisticaCardProps> = ({ icon, title, value, color }) => {
+const StatCard = ({ icon, title, value, color }: EstatisticaCardProps): JSX.Element => {
     const colorClasses = {
         red: { bg: 'bg-red-100', text: 'text-red-600' },
         green: { bg: 'bg-green-100', text: 'text-green-600' },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { JSX } from "react";
 import type { EstatisticaPessoaDTO } from "@/types";
 import { AlertIcon, CheckIcon } from "./icones";
 import StatCard from "./EstatisticaCard";
@@ -9,7 +9,7 @@ interface EstatisticasProps {
     isLoading: boolean;
 }
 
-const Estatisticas: React.FC<EstatisticasProps> = ({ stats, isLoading }) => {
+const Estatisticas = ({ stats, isLoading }: EstatisticasProps): JSX.Element => {
     if (isLoading || !stats) {
         return (
             <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
@@ -21,17 +21,17 @@ const Estatisticas: React.FC<EstatisticasProps> = ({ stats, isLoading }) => {
 
     return (
         <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-            <StatCard 
-                title="Pessoas Desaparecidas" 
-                value={stats.quantPessoasDesaparecidas} 
-                icon={<AlertIcon />} 
-                color="red" 
+            <StatCard
+                title="Pessoas Desaparecidas"
+                value={stats.quantPessoasDesaparecidas}
+                icon={<AlertIcon />}
+                color="red"
             />
-            <StatCard 
-                title="Pessoas Localizadas" 
-                value={stats.quantPessoasEncontradas} 
-                icon={<CheckIcon />} 
-                color="green" 
+            <StatCard
+                title="Pessoas Localizadas"
+                value={stats.quantPessoasEncontradas}
+                icon={<CheckIcon />}
+                color="green"
             />
         </section>
     );

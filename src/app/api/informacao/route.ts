@@ -1,6 +1,16 @@
 import { NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
+/**
+ * Proxy de API para envio de informações acerca de uma pessoa desaparecida.
+ * 
+ * Esta API Route recebe uma requisição 'multipart/form-data' do cliente,
+ * a reconstrói para o formato esperado pela API externa (texto na URL, arquivos no corpo)
+ * e a encaminha.
+ * 
+ * @param request objeto de requisição (Request) recebido do frontend, contendo o FormData.
+ * @returns promise que resolve para a resposta da api ou para erro.
+ */
+export async function POST(request: Request): Promise<NextResponse> {
     try {
         const formData = await request.formData();
 

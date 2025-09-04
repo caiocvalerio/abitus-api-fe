@@ -1,15 +1,8 @@
 "use client";
 
-import { useEffect } from 'react';
+import { JSX, useEffect } from 'react';
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
-
+export default function Error({ error, reset, }: { error: Error & { digest?: string }; reset: () => void; }): JSX.Element {
   useEffect(() => {
     console.error(error);
   }, [error]);
