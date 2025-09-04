@@ -22,7 +22,7 @@ export const getPessoas = async (params: PessoaSearchParams): Promise<PagePessoa
 
         return response.data;
     } catch (error) {
-        console.log("[ERROR] Falha ao buscar pessoas: ", error);
+        console.error("Falha ao buscar pessoas: ", error);
 
         if (axios.isAxiosError(error) && error.response) {
             if (error.response.status === 404) {
@@ -35,12 +35,12 @@ export const getPessoas = async (params: PessoaSearchParams): Promise<PagePessoa
     }
 }
 
-export const getEstatistica = async () : Promise<EstatisticaPessoaDTO> => {
+export const getEstatisticas = async () : Promise<EstatisticaPessoaDTO> => {
     try {
         const response = await api.get('/v1/pessoas/aberto/estatistico');
         return response.data;
     } catch (error) {
-        console.error("[ERROR] Falha ao buscar estatísticas:", error);
+        console.error("Falha ao buscar estatísticas:", error);
         throw new Error('Não foi possível carregar as estatísticas.');
     }
 }
@@ -50,7 +50,7 @@ export const getPessoaById = async (id: number): Promise<PessoaResumo> => {
         const response = await api.get(`/v1/pessoas/${id}`);
         return response.data;
     } catch (error) {
-        console.error(`[ERROR] Falha ao buscar pessoa com ID ${id}:`, error);
+        console.error(`Falha ao buscar pessoa com ID ${id}:`, error);
         throw new Error('Não foi possível carregar os detalhes da pessoa.');
     }
 }
@@ -84,7 +84,7 @@ export const adicionarInformacaoOcorrencia = async (payload: AdicionarInformacao
         return await response.json();
 
     } catch (error) {
-        console.error("[ERROR] Falha ao adicionar informação:", error);
+        console.error("Falha ao adicionar informação:", error);
         throw error;
     }
 };
