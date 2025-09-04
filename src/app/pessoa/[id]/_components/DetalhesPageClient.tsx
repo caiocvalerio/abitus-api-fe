@@ -3,8 +3,6 @@
 import { useState } from "react";
 import type { PessoaResumo } from "@/types";
 import Link from "next/link";
-
-
 import DetalheHeader from "./DetalheHeader";
 import InfoPessoais from "./InfoPessoais";
 import BotaoAcao from "./BotaoAcao";
@@ -22,7 +20,11 @@ export default function DetalhesPageClient({ pessoa }: { pessoa: PessoaResumo })
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     if (!pessoa) {
-        return <div className="flex items-center justify-center min-h-screen">Pessoa não encontrada.</div>;
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                Pessoa não encontrada.
+            </div>
+        );
     }
 
     const isLocalizada = !!pessoa.ultimaOcorrencia?.dataLocalizacao;

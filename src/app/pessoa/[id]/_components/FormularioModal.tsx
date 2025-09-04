@@ -1,7 +1,12 @@
+"use client";
+
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import toast from 'react-hot-toast';
+import { adicionarInformacaoOcorrencia } from '@/services/pessoaService';
 
 const CloseIcon = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>;
+const SpinnerIcon = () => <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>;
 
 interface FormularioModalProps {
     isOpen: boolean;
@@ -14,20 +19,51 @@ const FormularioModal: React.FC<FormularioModalProps> = ({ isOpen, onClose, ocoI
     const [data, setData] = useState('');
     const [descricao, setDescricao] = useState('');
     const [files, setFiles] = useState<FileList | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!ocoId) {
+            toast.error("ID da ocorrência não encontrado.");
+            return;
+        }
+        
+        setIsSubmitting(true);
+        const loadingToast = toast.loading('Enviando informação...');
 
-        // Aqui, no futuro, virá a lógica para enviar os dados para a API
-        console.log({
-            ocoId,
-            informacao,
-            data,
-            descricao,
-            files,
-        });
-        alert('Informações prontas para serem enviadas! (Veja o console)');
-        onClose(); // Fecha o modal após o envio
+        try {
+            await adicionarInformacaoOcorrencia({
+                ocoId,
+                informacao,
+                data,
+                descricao,
+                files,
+            });
+            
+            toast.dismiss(loadingToast);
+            toast.success('Informação enviada com sucesso!');
+        
+            onClose();
+
+            // Limpa o formulário
+            setInformacao('');
+            setData('');
+            setDescricao('');
+            setFiles(null);
+
+            const fileInput = document.getElementById('files') as HTMLInputElement;
+            if (fileInput) fileInput.value = '';
+
+        } catch (error) {
+            toast.dismiss(loadingToast);
+            if (error instanceof Error) {
+                toast.error(error.message);
+            } else {
+                toast.error('Ocorreu um erro desconhecido.');
+            }
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
