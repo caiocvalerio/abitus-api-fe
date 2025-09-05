@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
 
-// const URL_BASE: string = 'https://abitus-api.geia.vip'
 const URL_BASE: string | undefined = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 if (!URL_BASE) {
@@ -11,8 +10,8 @@ const api: AxiosInstance = axios.create({
     baseURL: URL_BASE,
     headers: {
         'Content-Type': 'application/json',
-    },
-    timeout: 15000, // aumentado para tentar deploy pela vercel
+    }
+    //timeout: 15000, // retirado para tentar deploy pela vercel
 });
 
 export default api;
