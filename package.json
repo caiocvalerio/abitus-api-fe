@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest"
+    "test": "NODE_ENV=test vitest"
   },
   "dependencies": {
     "axios": "^1.11.0",
