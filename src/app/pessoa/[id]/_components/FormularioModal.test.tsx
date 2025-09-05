@@ -79,7 +79,7 @@ describe('Componente: FormularioModal', () => {
         await user.type(textareaInformacao, 'Informação de teste');
         await user.type(inputDescricao, 'Descrição de teste');
 
-        const botaoEnviar = screen.getByRole('button', { name: /Enviar Informação/i });
+        const botaoEnviar = screen.getByRole('button', { name: /Enviar/i });
         await user.click(botaoEnviar);
 
         await waitFor(() => {
