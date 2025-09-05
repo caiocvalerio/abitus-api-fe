@@ -1,14 +1,27 @@
+"use client"; //vercel
+
+import { useEffect, useState } from "react";
 import { getPessoas } from "@/services/pessoaService";
 import HomePageClient from "./_components/HomePageClient";
-import { JSX } from "react";
 import { PagePessoa } from "@/types";
 
-export const dynamic = "force-dynamic"; // tentativa vercel
+export default function Home() {
+  const [pageData, setPageData] = useState<PagePessoa | null>(null);
+  const [loading, setLoading] = useState(true);
 
-export default async function Home(): Promise<JSX.Element> {
-  const initialPageData: PagePessoa = await getPessoas({ pagina: 0, porPagina: 12 });
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getPessoas({ pagina: 0, porPagina: 12 });
+        setPageData(data);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
 
-  return (
-    <HomePageClient initialPageData={initialPageData} />
-  );
+  if (loading) return <div>Carregando...</div>;
+
+  return <HomePageClient initialPageData={pageData!} />;
 }
