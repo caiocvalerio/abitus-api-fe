@@ -40,7 +40,7 @@ describe('Função: formataNome', () => {
      */
     it('deve retornar "N/A" para entradas vazias ou nulas', () => {
         expect(formataNome('')).toBe('N/A');
-        // @ts-expect-error
+        // @ts-expect-error: testa-se intencionalmente a passagem de null para garantir o comportamento.
         expect(formataNome(null)).toBe('N/A');
     });
 

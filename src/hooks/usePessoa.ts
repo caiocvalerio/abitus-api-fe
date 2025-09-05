@@ -9,11 +9,12 @@ type UsePessoaReturn = {
 }
 
 export const usePessoas = (filtros: FiltrosBusca, pagina: number, initialData: PagePessoa | null = null): UsePessoaReturn => {
+    const isInitialLoad = pagina === 1 && Object.keys(filtros).length === 0 && !!initialData;
     const [pageData, setPageData] = useState<PagePessoa | null>(initialData);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const isInitialLoad = pagina === 1 && Object.keys(filtros).length === 0;
+        
         if (isInitialLoad && initialData) {
             setPageData(initialData);
             return;
@@ -29,7 +30,6 @@ export const usePessoas = (filtros: FiltrosBusca, pagina: number, initialData: P
                     nome: filtros.nome || undefined,
                     sexo: filtros.sexo || undefined,
                     status: filtros.situacao === 'todos' ? undefined : filtros.situacao,
-                    vivo: filtros.vivo === 'todos' ? undefined : filtros.vivo === 'true',
                     faixaIdadeInicial: filtros.idadeMinima ? Number(filtros.idadeMinima) : undefined,
                     faixaIdadeFinal: filtros.idadeMaxima ? Number(filtros.idadeMaxima) : undefined,
                 };
@@ -81,7 +81,7 @@ export const usePessoas = (filtros: FiltrosBusca, pagina: number, initialData: P
         };
 
         fetchPessoas();
-    }, [filtros, pagina, initialData]);
+    }, [filtros.nome, filtros.sexo, filtros.situacao, filtros.idadeMinima, filtros.idadeMaxima, pagina, initialData, isInitialLoad]);
 
     return { pageData, isLoading };
 };

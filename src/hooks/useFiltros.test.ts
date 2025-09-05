@@ -1,6 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { useFiltros } from './useFiltro';
+import { ChangeEvent } from 'react';
 
 describe('Hook: useFiltros', () => {
     
@@ -40,7 +41,7 @@ describe('Hook: useFiltros', () => {
 
         act(() => {
             result.current.setTermoBusca('Teste');
-            result.current.handleFiltroChange({ target: { name: 'sexo', value: 'MASCULINO' } } as any);
+            result.current.handleFiltroChange({ target: { name: 'sexo', value: 'MASCULINO' } } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
         });
 
         expect(result.current.termoBusca).toBe('Teste');
@@ -77,7 +78,7 @@ describe('Hook: useFiltros', () => {
             result.current.setTermoBusca(termo);
 
             Object.entries(filtros).forEach(([name, value]) => {
-                 result.current.handleFiltroChange({ target: { name, value } } as any);
+                 result.current.handleFiltroChange({ target: { name, value } } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
             });
         });
 

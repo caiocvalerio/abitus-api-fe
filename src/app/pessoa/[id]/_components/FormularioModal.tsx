@@ -4,6 +4,7 @@ import { JSX, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import toast from 'react-hot-toast';
 import { adicionarInformacaoOcorrencia } from '@/services/pessoaService';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
 
 interface FormularioModalProps {
     isOpen: boolean;
@@ -11,7 +12,7 @@ interface FormularioModalProps {
     ocoId: number | undefined;
 }
 
-const CloseIcon = (): JSX.Element =>{
+const CloseIcon = (): JSX.Element => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
     );
@@ -30,7 +31,7 @@ const FormularioModal = ({ isOpen, onClose, ocoId }: FormularioModalProps): JSX.
             toast.error("ID da ocorrência não encontrado.");
             return;
         }
-        
+
         setIsSubmitting(true);
         const loadingToast = toast.loading('Enviando informação...');
 
@@ -42,10 +43,10 @@ const FormularioModal = ({ isOpen, onClose, ocoId }: FormularioModalProps): JSX.
                 descricao,
                 files,
             });
-            
+
             toast.dismiss(loadingToast);
             toast.success('Informação enviada com sucesso!');
-        
+
             onClose();
 
             // Limpa o formulário
@@ -90,9 +91,9 @@ const FormularioModal = ({ isOpen, onClose, ocoId }: FormularioModalProps): JSX.
                         <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition-colors">
                             <CloseIcon />
                         </button>
-                        
+
                         <h2 className="text-2xl font-bold text-slate-800 mb-6">Adicionar Nova Informação</h2>
-                        
+
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label htmlFor="data" className="block text-sm font-medium text-slate-700 mb-1">Data em que viu a pessoa*</label>
@@ -127,7 +128,7 @@ const FormularioModal = ({ isOpen, onClose, ocoId }: FormularioModalProps): JSX.
                                     className="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                                 />
                             </div>
-                             <div>
+                            <div>
                                 <label htmlFor="descricao" className="block text-sm font-medium text-slate-700 mb-1">Descrição do anexo*</label>
                                 <input
                                     type="text"
@@ -140,11 +141,21 @@ const FormularioModal = ({ isOpen, onClose, ocoId }: FormularioModalProps): JSX.
                                 />
                             </div>
                             <div className="pt-4 flex justify-end gap-3">
-                                <button type="button" onClick={onClose} className="px-6 py-2 text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200 font-semibold">
+                                <button
+                                    type="button"
+                                    onClick={onClose}
+                                    disabled={isSubmitting}
+                                    className="px-6 py-2 text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
                                     Cancelar
                                 </button>
-                                <button type="submit" className="px-6 py-2 text-white bg-blue-950 rounded-lg hover:bg-blue-800 font-semibold">
-                                    Enviar Informação
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="px-6 py-2 text-white bg-blue-950 rounded-lg hover:bg-blue-800 font-semibold flex items-center justify-center w-[180px] h-[40px] disabled:opacity-75 disabled:cursor-not-allowed"
+                                >
+                                    {/* Mostra o spinner se estiver enviando, senão, mostra o texto */}
+                                    {isSubmitting ? <LoadingSpinner /> : 'Enviar Informação'}
                                 </button>
                             </div>
                         </form>
