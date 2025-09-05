@@ -1,5 +1,3 @@
-"use server"; // tentativa de subir projeto no vercel
-
 import { getPessoas } from "@/services/pessoaService";
 import HomePageClient from "./_components/HomePageClient";
 import { JSX } from "react";
