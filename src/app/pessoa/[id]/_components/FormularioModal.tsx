@@ -24,6 +24,7 @@ const FormularioModal = ({ isOpen, onClose, ocoId }: FormularioModalProps): JSX.
     const [descricao, setDescricao] = useState('');
     const [files, setFiles] = useState<FileList | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const hoje = new Date().toISOString().split('T')[0];
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -103,6 +104,7 @@ const FormularioModal = ({ isOpen, onClose, ocoId }: FormularioModalProps): JSX.
                                     value={data}
                                     onChange={(e) => setData(e.target.value)}
                                     required
+                                    max = {hoje}
                                     className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
@@ -152,10 +154,9 @@ const FormularioModal = ({ isOpen, onClose, ocoId }: FormularioModalProps): JSX.
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="px-6 py-2 text-white bg-blue-950 rounded-lg hover:bg-blue-800 font-semibold flex items-center justify-center w-[180px] h-[40px] disabled:opacity-75 disabled:cursor-not-allowed"
+                                    className="px-6 py-2 text-white bg-blue-950 rounded-lg hover:bg-blue-800 font-semibold flex items-center justify-center w-[120px] h-[40px] disabled:opacity-75 disabled:cursor-not-allowed"
                                 >
-                                    {/* Mostra o spinner se estiver enviando, senão, mostra o texto */}
-                                    {isSubmitting ? <LoadingSpinner /> : 'Enviar Informação'}
+                                    {isSubmitting ? <LoadingSpinner /> : 'Enviar'}
                                 </button>
                             </div>
                         </form>
