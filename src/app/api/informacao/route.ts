@@ -14,7 +14,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     try {
         const formData = await request.formData();
         const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 30000); // 30s de timeout para tentar conseguir enviar a requisição pelo vercel
+        const timeout = setTimeout(() => controller.abort(), 8000); // 8s de timeout para tentar conseguir enviar a requisição pelo vercel (plano gratuito)
         const ocoId = formData.get('ocoId');
         const informacao = formData.get('informacao');
         const data = formData.get('data');
@@ -34,13 +34,14 @@ export async function POST(request: Request): Promise<NextResponse> {
             });
         }
 
+        const start = Date.now();
         const apiResponse = await fetch(apiUrl.toString(), {
             method: 'POST',
             body: bodyFormData,
             signal: controller.signal,
         });
-
         clearTimeout(timeout);
+        console.log("Tempo total da requisição externa:", Date.now() - start, "ms");
 
         if (!apiResponse.ok) {
             const errorData = await apiResponse.text();
