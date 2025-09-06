@@ -2,7 +2,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { getPessoas } from '@/services/pessoaService';
 import { usePessoas } from './usePessoa';
-import type { PagePessoa, PessoaResumo, FiltrosBusca } from '@/types';
+import type { PagePessoa, FiltrosBusca } from '@/types';
 
 vi.mock('@/services/pessoaService');
 const mockedGetPessoas = vi.mocked(getPessoas);
