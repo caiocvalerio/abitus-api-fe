@@ -1,6 +1,7 @@
 import { AdicionarInformacaoPayload, EstatisticaPessoaDTO, OcorrenciaInformacao, PagePessoa, PessoaResumo, PessoaSearchParams } from "@/types";
 import api from "./api";
 import axios from "axios";
+import { fileToBase64 } from "@/utils/fileToBase64";
 
 export const getPessoas = async (params: PessoaSearchParams): Promise<PagePessoa> => {
     try {
@@ -67,7 +68,8 @@ export const adicionarInformacaoOcorrencia = async (payload: AdicionarInformacao
 
     if (payload.files) {
         for (let i = 0; i < payload.files.length; i++) {
-            formData.append('files', payload.files[i]);
+            const payloadImage = await fileToBase64(payload.files[i]); 
+            formData.append('anexos[]', payloadImage);
         }
     }
 
