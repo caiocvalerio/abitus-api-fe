@@ -35,9 +35,8 @@ const FiltrosAvancados = ({ visivel, filtros, onFiltroChange }: FiltrosAvancados
                 <FiltroAccordion title="Situação">
                     <div className="p-4">
                         <select name="situacao" value={filtros.situacao} onChange={onFiltroChange} className={inputStyles}>
-                            <option value="todos">Todos</option>
-                            <option value="LOCALIZADO">Localizadas</option>
                             <option value="DESAPARECIDO">Desaparecidas</option>
+                            <option value="LOCALIZADO">Localizadas</option>
                         </select>
                     </div>
                 </FiltroAccordion>

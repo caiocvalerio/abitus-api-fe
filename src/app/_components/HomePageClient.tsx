@@ -8,7 +8,7 @@ import type { FiltrosBusca, PagePessoa } from "@/types";
 import MenuLateral from "@/components/layout/MenuLateral";
 import Paginacao from "@/components/ui/Paginacao";
 import Estatisticas from "@/components/features/estatistica";
-import PessoaCard from "@/components/features/pessoas";
+import PessoaCard from "@/components/features/cardPessoas";
 import LoadingOverlay from "@/components/ui/LoadingOverlay";
 import Link from "next/link";
 
@@ -57,8 +57,11 @@ export default function HomePageClient({ initialPageData }: { initialPageData: P
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-24 pt-2.5 min-h-[300px]">
                             {pageData?.content && pageData.content.length > 0 ? (
                                 pageData.content.map((pessoa) => (
-                                    <Link href={`/pessoa/${pessoa.id}`} key={pessoa.id}>
-                                        <PessoaCard key={pessoa.id} pessoa={pessoa} />
+                                    <Link href={`/pessoa/${pessoa.id}?situacao=${filtros.situacao || 'DESAPARECIDO'}`}  key={pessoa.id}>
+                                        <PessoaCard 
+                                        key={pessoa.id} 
+                                        pessoa={pessoa}
+                                        filtroAplicado={filtros.situacao} />
                                     </Link>
                                 ))
                             ) : (

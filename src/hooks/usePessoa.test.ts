@@ -1,21 +1,14 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { PagePessoa, PessoaResumo } from '@/types';
 import { getPessoas } from '@/services/pessoaService';
 import { usePessoas } from './usePessoa';
+import type { PagePessoa, PessoaResumo, FiltrosBusca } from '@/types';
 
 vi.mock('@/services/pessoaService');
 const mockedGetPessoas = vi.mocked(getPessoas);
 
-const mockPessoas: PessoaResumo[] = [
-    { id: 1, nome: 'Ana Localizada', ultimaOcorrencia: { dataLocalizacao: '2025-01-01' }, vivo: true },
-    { id: 2, nome: 'Beto Desaparecido', ultimaOcorrencia: { dataLocalizacao: undefined }, vivo: true },
-    { id: 3, nome: 'Carla Localizada', ultimaOcorrencia: { dataLocalizacao: '2025-02-02' }, vivo: false },
-    { id: 4, nome: 'Daniel Desaparecido', ultimaOcorrencia: { dataLocalizacao: '' }, vivo: true },
-];
-
 const mockPageData: PagePessoa = {
-    content: mockPessoas,
+    content: [{ id: 1, nome: 'Ana Teste', ultimaOcorrencia: { dataLocalizacao: '2025-01-01' }, vivo: true }],
     totalPages: 1,
 };
 
@@ -23,11 +16,11 @@ describe('Hook: usePessoas', () => {
 
     beforeEach(() => {
         vi.clearAllMocks();
+        mockedGetPessoas.mockResolvedValue(mockPageData);
     });
 
     /*
-     * Objetivo: Verificar se o hook utiliza os dados iniciais passados via props
-     * sem fazer uma nova chamada à API.
+     * Objetivo: Verificar se o hook utiliza os dados iniciais sem fazer chamada à API.
      */
     it('deve usar os dados iniciais e não buscar novos dados na primeira carga', () => {
         renderHook(() => usePessoas({}, 1, mockPageData));
@@ -35,38 +28,43 @@ describe('Hook: usePessoas', () => {
     });
 
     /*
-    * Objetivo: Testar o ciclo completo de busca.
-    * Verificamos se o hook busca os dados, trata a lista de acordo
-    * com o filtro de nome e retorna o resultado correto.
-    */
-    it('deve buscar dados e refiná-los de acordo com o filtro de nome', async () => {
-        mockedGetPessoas.mockResolvedValue(mockPageData);
-
-        const filtros = { nome: 'Ana' };
-        const { result } = renderHook(() => usePessoas(filtros, 1));
-
+     * Objetivo: Verificar se o hook chama o serviço getPessoas com os parâmetros
+     * corretamente formatados a partir dos filtros da UI.
+     */
+    it('deve chamar o serviço getPessoas com os parâmetros formatados corretamente', async () => {
+        const filtrosDaUI: FiltrosBusca = {
+            nome: 'Maria',
+            situacao: 'LOCALIZADO',
+            idadeMinima: '20',
+        };
+        
+        renderHook(() => usePessoas(filtrosDaUI, 3));
+        
         await waitFor(() => {
-            expect(result.current.isLoading).toBe(false);
-            expect(result.current.pageData?.content).toHaveLength(1);
-            expect(result.current.pageData?.content?.[0].nome).toBe('Ana Localizada');
+            expect(mockedGetPessoas).toHaveBeenCalledTimes(1);
         });
 
-        expect(mockedGetPessoas).toHaveBeenCalledTimes(1);
+        expect(mockedGetPessoas).toHaveBeenCalledWith({
+            pagina: 2, // página 3 - 1
+            porPagina: 12,
+            nome: 'Maria',
+            status: 'LOCALIZADO',
+            faixaIdadeInicial: 20,
+            faixaIdadeFinal: undefined, 
+            sexo: undefined,
+            vivo: undefined,
+        });
     });
 
     /*
-     * Objetivo: Testar o estado de carregamento.
-     * Verificamos se a variável 'isLoading' se torna 'true' durante a busca
-     * e 'false' quando a busca termina.
+     * Objetivo: Verificar se os dados retornados pelo serviço são
+     * repassados corretamente para o estado do hook.
      */
-    it('deve filtrar os resultados por "LOCALIZADO" no frontend', async () => {
-        mockedGetPessoas.mockResolvedValue(mockPageData);
-        const { result } = renderHook(() => usePessoas({ situacao: "LOCALIZADO" }, 1));
+    it('deve atualizar pageData com o retorno da API', async () => {
+        const { result } = renderHook(() => usePessoas({ nome: 'teste' }, 1));
 
         await waitFor(() => {
-            expect(result.current.pageData?.content).toHaveLength(2);
-            expect(result.current.pageData?.content?.map(p => p.nome))
-                .toEqual(expect.arrayContaining(['Ana Localizada', 'Carla Localizada']));
+            expect(result.current.pageData).toEqual(mockPageData);
         });
     });
 });

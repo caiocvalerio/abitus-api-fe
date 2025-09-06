@@ -22,7 +22,10 @@ export const useFiltros = ({ onBusca, onLimpar, setMenuAberto }: UseFiltrosProps
     const [termoBusca, setTermoBusca] = useState('');
     const [filtrosVisiveis, setFiltrosVisiveis] = useState(false);
     const [filtrosAvancados, setFiltrosAvancados] = useState<FiltrosAvancadosData>({
-        sexo: '', situacao: 'todos', idadeMinima: '', idadeMaxima: '',
+        sexo: '', 
+        situacao: 'DESAPARECIDO', 
+        idadeMinima: '', 
+        idadeMaxima: '',
     });
 
     const handleBuscaClick = () => {
@@ -34,7 +37,10 @@ export const useFiltros = ({ onBusca, onLimpar, setMenuAberto }: UseFiltrosProps
     const handleLimparClick = () => {
         setTermoBusca('');
         setFiltrosAvancados({
-            sexo: '', situacao: 'todos', idadeMinima: '', idadeMaxima: ''
+            sexo: '', 
+            situacao: 'DESAPARECIDO', 
+            idadeMinima: '', 
+            idadeMaxima: ''
         });
         onLimpar();
     };

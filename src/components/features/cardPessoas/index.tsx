@@ -8,10 +8,13 @@ import { JSX } from 'react';
 
 interface PessoaCardProps {
     pessoa: PessoaResumo;
+    filtroAplicado?: 'LOCALIZADO' | 'DESAPARECIDO';
 }
 
-const PessoaCard = ({ pessoa }: PessoaCardProps): JSX.Element => {
-    const isLocalizada = !!pessoa.ultimaOcorrencia?.dataLocalizacao;
+const PessoaCard = ({ pessoa, filtroAplicado }: PessoaCardProps): JSX.Element => {
+    const isLocalizada = filtroAplicado 
+        ? filtroAplicado === 'LOCALIZADO' 
+        : !!pessoa.ultimaOcorrencia?.dataLocalizacao;
     const status = isLocalizada ? 'Localizada' : 'Desaparecida';
     const tagClasses = isLocalizada ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
     const vivoStatus = typeof pessoa.vivo === 'boolean' ? (pessoa.vivo ? 'Sim' : 'Não') : ' - ';
