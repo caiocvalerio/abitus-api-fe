@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { PessoaResumo } from "@/types";
 import { getPessoaById } from "@/services/pessoaService";
@@ -21,7 +21,10 @@ const ArrowLeftIcon = () => (
 export default function PessoaDetalhePage() {
   const params = useParams();
   const id = params.id as string;
-
+  const situacao = useSearchParams().get('situacao');
+  const isLocalizada = situacao === 'LOCALIZADO';
+  const status = isLocalizada ? 'Localizada' : 'Desaparecida'; //formata texto
+  const tagClasses = isLocalizada ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'; // altera cor
   const [pessoa, setPessoa] = useState<PessoaResumo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,9 +62,7 @@ export default function PessoaDetalhePage() {
     );
   }
 
-  const isLocalizada = !!pessoa.ultimaOcorrencia?.dataLocalizacao;
-  const status = isLocalizada ? 'Localizada' : 'Desaparecida';
-  const tagClasses = isLocalizada ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+  
 
   return (
     <>
