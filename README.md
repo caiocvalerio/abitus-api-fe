@@ -114,15 +114,15 @@ Comecei o desenvolvimento seguindo os wireframes, mas à medida que o projeto ev
 
 * **Proxy de API (`route.ts`):** Foi criada uma API Route para servir como um proxy para o endpoint de envio de informações. Essa decisão foi tomada para contornar a restrição de CORS da API externa.
 
-* **Tratamento de dados:** No hook `usePessoas`, os dados retornados pela API sobre pessoas desaparecidas são filtrados e processados para uso direto no frontend. Os filtros aplicados incluem:
+* **Tratamento de dados:** Inicialmente, implementei no hook `usePessoas` alguns filtros adicionais sobre os dados retornados pela API. A ideia era garantir maior consistência no frontend. No entanto, após refletir, considerei que tais filtros se aproximavam mais de regras de negócio e, portanto, não deveriam ser responsabilidade da camada de apresentação. Ainda assim, deixo registrado que cheguei a desenvolvê-los:  
 
-    * **Filtro de Nome (`startsWith`):**
+    * **Filtro de Nome (`startsWith`):**  
         * **Questão:** A API realiza uma busca do tipo "contém" (ex.: buscar por "Ana" também retornava "Mari**ana**").  
-        * **Implementação:** No frontend, a lista é refinada para exibir apenas resultados cujo nome **começa com** o termo pesquisado.
+        * **Implementação:** No frontend, refinei a lista para exibir apenas resultados cujo nome **começava com** o termo pesquisado.  
 
-    * **Filtro de Situação (`dataLocalizacao`):**
+    * **Filtro de Situação (`dataLocalizacao`):**  
         * **Questão:** Ao filtrar por `status=LOCALIZADO`, a API retornava registros de pessoas cujo campo `dataLocalizacao` estava nulo ou vazio.  
-        * **Implementação:** Um filtro de segurança garante que uma pessoa só seja considerada "Localizada" se o campo `ultimaOcorrencia.dataLocalizacao` contiver uma data válida.
+        * **Implementação:** Criei um filtro de segurança que só considerava alguém como "Localizada" se o campo `ultimaOcorrencia.dataLocalizacao` contivesse uma data válida.  
 
 ### Análise de Conectividade em Produção e Limitações
 
