@@ -58,7 +58,7 @@ describe('Componente: MenuLateral', () => {
 
         const inputNome = screen.getByPlaceholderText(/Buscar por nome.../i);
         await user.type(inputNome, 'Maria');
-        
+
         expect(inputNome).toHaveValue('Maria');
     });
 });

@@ -14,7 +14,7 @@ export const usePessoas = (filtros: FiltrosBusca, pagina: number, initialData: P
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        
+
         if (isInitialLoad && initialData) {
             setPageData(initialData);
             return;

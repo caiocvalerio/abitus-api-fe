@@ -15,8 +15,8 @@ const FiltrosAvancados = ({ visivel, filtros, onFiltroChange }: FiltrosAvancados
 
     return (
         <div className={clsx("overflow-hidden transition-all duration-500 ease-in-out", {
-            'max-h-screen opacity-100': visivel, 
-            'max-h-0 opacity-0': !visivel      
+            'max-h-screen opacity-100': visivel,
+            'max-h-0 opacity-0': !visivel
         })}>
             <div className="space-y-4 pt-4">
 
@@ -70,7 +70,7 @@ const FiltrosAvancados = ({ visivel, filtros, onFiltroChange }: FiltrosAvancados
                         </label>
                     </div>
                 </FiltroAccordion>
-                
+
                 <span></span>
             </div>
         </div>

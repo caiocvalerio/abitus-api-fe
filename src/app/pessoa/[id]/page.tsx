@@ -4,8 +4,6 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { PessoaResumo } from "@/types";
 import { getPessoaById } from "@/services/pessoaService";
-
-// Imports para a UI
 import Link from "next/link";
 import LoadingOverlay from "@/components/ui/LoadingOverlay";
 import DetalheHeader from "./_components/DetalheHeader";
@@ -15,11 +13,10 @@ import FormularioModal from "./_components/FormularioModal";
 import InfoOcorrencia from "./_components/InfoOcorrencias";
 
 const ArrowLeftIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="size-5 mr-2">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-    </svg>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="size-5 mr-2">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+  </svg>
 );
-
 
 export default function PessoaDetalhePage() {
   const params = useParams();

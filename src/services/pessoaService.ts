@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const getPessoas = async (params: PessoaSearchParams): Promise<PagePessoa> => {
     try {
+
         const queryParams: Record<string, string | number | boolean> = {
             pagina: params.pagina ?? 0,
             porPagina: params.porPagina ?? 10,
@@ -26,16 +27,16 @@ export const getPessoas = async (params: PessoaSearchParams): Promise<PagePessoa
 
         if (axios.isAxiosError(error) && error.response) {
             if (error.response.status === 404) {
-                return { content: [], totalPages: 0 }; 
+                return { content: [], totalPages: 0 };
             }
             throw new Error('O servidor parece estar com problemas. Tente novamente mais tarde.');
         }
-        
+
         throw new Error('Não foi possível carregar a lista de pessoas');
     }
 }
 
-export const getEstatisticas = async () : Promise<EstatisticaPessoaDTO> => {
+export const getEstatisticas = async (): Promise<EstatisticaPessoaDTO> => {
     try {
         const response = await api.get('/v1/pessoas/aberto/estatistico');
         return response.data;

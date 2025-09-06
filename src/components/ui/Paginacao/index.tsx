@@ -13,33 +13,40 @@ const getPaginationNumbers = (totalPages: number, currentPage: number, maxButton
     if (totalPages <= maxButtons) {
         return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
+
     const pageNumbers: (number | string)[] = [];
     const half = Math.floor(maxButtons / 2);
     let start = currentPage - half;
     let end = currentPage + half;
+
     if (start < 1) {
         start = 1;
         end = maxButtons;
     }
+
     if (end > totalPages) {
         end = totalPages;
         start = totalPages - maxButtons + 1;
     }
+
     if (start > 1) {
         pageNumbers.push(1);
         if (start > 2) {
             pageNumbers.push('...');
         }
     }
+
     for (let i = start; i <= end; i++) {
         pageNumbers.push(i);
     }
+
     if (end < totalPages) {
         if (end < totalPages - 1) {
             pageNumbers.push('...');
         }
         pageNumbers.push(totalPages);
     }
+
     return pageNumbers;
 };
 
@@ -52,7 +59,6 @@ const Paginacao = ({ totalPages, currentPage, onPageChange }: PaginacaoProps): J
 
     return (
         <div className="flex justify-center items-center flex-wrap fixed bottom-0 left-0 w-full bg-white border-t p-2.5 gap-1 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] z-30 md:relative md:w-auto md:bg-transparent md:border-none md:shadow-none md:z-auto md:mt-8 md:gap-2">
-
             <button onClick={() => onPageChange(1)} disabled={currentPage === 1} className={clsx(baseButtonStyles, navButtonStyles)}>
                 Primeira
             </button>

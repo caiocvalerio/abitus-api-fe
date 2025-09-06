@@ -4,11 +4,10 @@ import { useFiltros } from './useFiltro';
 import { ChangeEvent } from 'react';
 
 describe('Hook: useFiltros', () => {
-    
+
     const mockOnBusca = vi.fn();
     const mockOnLimpar = vi.fn();
     const mockSetMenuAberto = vi.fn();
-
     const defaultProps = {
         onBusca: mockOnBusca,
         onLimpar: mockOnLimpar,
@@ -78,7 +77,7 @@ describe('Hook: useFiltros', () => {
             result.current.setTermoBusca(termo);
 
             Object.entries(filtros).forEach(([name, value]) => {
-                 result.current.handleFiltroChange({ target: { name, value } } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
+                result.current.handleFiltroChange({ target: { name, value } } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
             });
         });
 

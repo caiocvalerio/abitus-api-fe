@@ -27,7 +27,7 @@ describe('Componente: Estatisticas', () => {
             quantPessoasEncontradas: 753,
         };
         render(<Estatisticas stats={mockStats} isLoading={false} />);
-        
+
         expect(screen.getByText('428')).toBeInTheDocument();
         expect(screen.getByText('Pessoas Desaparecidas')).toBeInTheDocument();
         expect(screen.getByText('753')).toBeInTheDocument();

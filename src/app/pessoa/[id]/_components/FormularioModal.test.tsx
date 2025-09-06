@@ -12,7 +12,6 @@ vi.mock('react-hot-toast');
 const mockedAdicionarInformacao = vi.mocked(adicionarInformacaoOcorrencia);
 const mockedToastSuccess = vi.mocked(toast.success);
 
-
 describe('Componente: FormularioModal', () => {
 
     const mockOnClose = vi.fn();

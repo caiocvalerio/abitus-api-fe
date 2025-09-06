@@ -85,7 +85,6 @@ export default function HomePageClient({ initialPageData }: { initialPageData: P
                             )}
                         </AnimatePresence>
                     </>
-                    
                 </div>
             </div>
         </div>
