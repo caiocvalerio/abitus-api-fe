@@ -25,33 +25,31 @@ describe('Hook: useFiltros', () => {
         expect(result.current.termoBusca).toBe('');
         expect(result.current.filtrosVisiveis).toBe(false);
         expect(result.current.filtrosAvancados.sexo).toBe('');
-        expect(result.current.filtrosAvancados.situacao).toBe('todos');
+        expect(result.current.filtrosAvancados.situacao).toBe('DESAPARECIDO');
     });
 
     /*
      * Objetivo: Testar a funcionalidade de "limpar filtros".
-     * Este teste simula um usuário preenchendo alguns campos,
-     * depois chama a função de limpar e verifica duas coisas:
-     *      1. Se os estados internos (termoBusca, filtrosAvancados) foram resetados.
-     *      2. Se a função onLimpar (recebida via prop) foi chamada.
+     * Verifica se os estados são resetados para seus valores padrão,
+     * incluindo 'situacao' que agora volta para 'DESAPARECIDO'.
      */
-    it('deve limpar todos os campos ao chamar handleLimparClick', () => {
+    it('deve limpar os campos para os valores padrão ao chamar handleLimparClick', () => {
         const { result } = renderHook(() => useFiltros(defaultProps));
 
         act(() => {
             result.current.setTermoBusca('Teste');
-            result.current.handleFiltroChange({ target: { name: 'sexo', value: 'MASCULINO' } } as ChangeEvent<HTMLInputElement | HTMLSelectElement>);
+            const mockEvent = { target: { name: 'situacao', value: 'LOCALIZADO' } } as ChangeEvent<HTMLSelectElement>;
+            result.current.handleFiltroChange(mockEvent);
         });
 
-        expect(result.current.termoBusca).toBe('Teste');
-        expect(result.current.filtrosAvancados.sexo).toBe('MASCULINO');
+        expect(result.current.filtrosAvancados.situacao).toBe('LOCALIZADO');
 
         act(() => {
             result.current.handleLimparClick();
         });
 
         expect(result.current.termoBusca).toBe('');
-        expect(result.current.filtrosAvancados.sexo).toBe('');
+        expect(result.current.filtrosAvancados.situacao).toBe('DESAPARECIDO');
         expect(mockOnLimpar).toHaveBeenCalledTimes(1);
     });
 
