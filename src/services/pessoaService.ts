@@ -1,7 +1,6 @@
 import { AdicionarInformacaoPayload, EstatisticaPessoaDTO, OcorrenciaInformacao, PagePessoa, PessoaResumo, PessoaSearchParams } from "@/types";
 import api from "./api";
 import axios from "axios";
-import { body } from "framer-motion/client";
 
 export const getPessoas = async (params: PessoaSearchParams): Promise<PagePessoa> => {
     try {
@@ -18,7 +17,7 @@ export const getPessoas = async (params: PessoaSearchParams): Promise<PagePessoa
         if (params.faixaIdadeInicial) queryParams.faixaIdadeInicial = params.faixaIdadeInicial;
         if (params.faixaIdadeFinal) queryParams.faixaIdadeFinal = params.faixaIdadeFinal;
 
-        const response = await api.get('/v1/pessoas/aberto/filtro', {
+        const response = await api.get('/pessoas/aberto/filtro', {
             params: queryParams
         });
 
@@ -39,7 +38,7 @@ export const getPessoas = async (params: PessoaSearchParams): Promise<PagePessoa
 
 export const getEstatisticas = async (): Promise<EstatisticaPessoaDTO> => {
     try {
-        const response = await api.get('/v1/pessoas/aberto/estatistico');
+        const response = await api.get('/pessoas/aberto/estatistico');
         return response.data;
     } catch (error) {
         console.error("Falha ao buscar estatísticas:", error);
@@ -49,7 +48,7 @@ export const getEstatisticas = async (): Promise<EstatisticaPessoaDTO> => {
 
 export const getPessoaById = async (id: number): Promise<PessoaResumo> => {
     try {
-        const response = await api.get(`/v1/pessoas/${id}`);
+        const response = await api.get(`/pessoas/${id}`);
         return response.data;
     } catch (error) {
         console.error(`Falha ao buscar pessoa com ID ${id}:`, error);
