@@ -6,16 +6,16 @@ Este projeto foi desenvolvido como parte do processo seletivo da **Desenvolve MT
 
 ---
 
-## 📋 Resumo dos Requisitos Atendidos
+## Resumo dos Requisitos Atendidos
 
 A aplicação foi construída em **TypeScript** utilizando **Next.js** como framework base. 
-Os requisitos do projeto, presentes no livro-texto, implementados são detalhado abaixo.
+Os requisitos do projeto, presentes no livro-texto e implementados, são detalhados abaixo.
 
 ### Requisitos Gerais
 
 * **Rotas com Lazy Loading:** A arquitetura do Next.js App Router foi utilizada, garantindo o code-splitting e o carregamento sob demanda para cada rota, otimizando a performance inicial.
 * **Design Limpo e Intuitivo:** A interface foi projetada com foco na clareza e facilidade de uso, seguindo uma identidade visual consistente.
-* **Containerização com Docker:** A aplicação é containerizada, com os script `Dockerfile` e `docker-compose.yml`.
+* **Containerização com Docker:** A aplicação é containerizada, com os scripts `Dockerfile` e `docker-compose.yml`.
 * **Tratamento de Erros de Requisição:** O sistema possui um tratamento de erros por meio das notificações "toast" para falhas de interatividade e páginas de erro dedicadas para falhas críticas de carregamento no servidor.
 
 ### Requisitos Específicos
@@ -32,7 +32,7 @@ Os requisitos do projeto, presentes no livro-texto, implementados são detalhado
     * O formulário permite anexar fotos e indicar a localização onde a pessoa foi avistada.
     * O campo de data possui validação para não aceitar datas futuras e máscara de data.
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 * **Framework:** [Next.js](https://nextjs.org/)
 * **Biblioteca Base:** [React](https://react.dev/)
@@ -44,7 +44,7 @@ Os requisitos do projeto, presentes no livro-texto, implementados são detalhado
 * **Containerização:** [Docker](https://www.docker.com/)
 * **Deployment & CI/CD:** [Vercel](https://vercel.com/)
 
-## 🚀 Rodando o Projeto Localmente com Docker
+## Rodando o Projeto Localmente com Docker
 
 Esta seção contém o passo a passo para instalação e execução do projeto.
 
@@ -56,7 +56,7 @@ Esta seção contém o passo a passo para instalação e execução do projeto.
 
 1.  **Clone o Repositório:**
     ```bash
-    git clone [https://github.com/caiocvalerio/abitus-api-fe.git](https://github.com/caiocvalerio/abitus-api-fe.git)
+    git clone https://github.com/caiocvalerio/abitus-api-fe.git
     cd abitus-api-fe
     ```
 
@@ -76,23 +76,24 @@ Esta seção contém o passo a passo para instalação e execução do projeto.
     A aplicação estará disponível em [http://localhost:3000](http://localhost:3000).
 
 ### Como Rodar os Testes
-O script do `Dockerfile` já vem incluso com os testes antes do build. Porém, para executar a suíte de testes automatizados, use o seguinte comando:
+O script do `Dockerfile` já vem incluso com os testes antes do build. 
+Para executar a suíte de testes na pasta raiz do projeto, use o seguinte comando:
 
 ```bash
 npm test
 ```
 
-## Diário de Desenvolvimento e Decisões de Projeto
+## Diário de Desenvolvimento e Decisões do Projeto
 
 Esta seção documenta o processo de desenvolvimento e as principais decisões de arquitetura tomadas.
 
 ### Desenvolvimento da interface
-O desenvolvimento começou pela análise dos requisitos e a criação de wireframes básicos para o layout. Abaixo, segue os wireframes realizados para esse projeto:
+O desenvolvimento começou pela análise dos requisitos e a criação de wireframes básicos para o layout.
 
 <div align="center">
 
-**Página Principal (Busca e Resultados)**
-*Layout planejado para a tela de busca, com o menu de filtros à esquerda e a grade de cards de resultados à direita.*
+**Página Principal**
+*Layout planejado para a tela home, com o menu de filtros em cima e a grade de cards de resultados logo abaixo.*
 <br>
 <img src="./doc/wireframes/wireframe-home.png" width="600px" alt="Wireframe da Página Principal">
 
@@ -105,23 +106,23 @@ O desenvolvimento começou pela análise dos requisitos e a criação de wirefra
 
 </div>
 
-Comecei a desenvolver orientado pelos wireframes, porém conforme o projeto evoluia e eu procurava por inspirações de design na internet me deparei com o site [Cadastro Nacional de Pessoas Desaparecidas](https://cnpd.mj.gov.br/painel-publico) e por conta disso, em vez de um site mais tradicional com header, optei por pivotar para um menu lateral, forma hoje como o projeto está desenvolvido.
+Comecei o desenvolvimento seguindo os wireframes, mas à medida que o projeto evoluía e eu buscava inspirações de design, encontrei o site [Cadastro Nacional de Pessoas Desaparecidas](https://cnpd.mj.gov.br/painel-publico). Com base nisso, optei por pivotar o layout tradicional com header para um menu lateral, que é como o projeto está estruturado atualmente.
 
-### Decisões Chave de Arquitetura
+### Decisões de Arquitetura
 
 * **Next.js:** Esta arquitetura implementa o Lazy Loading por rota automaticamente, o que foi um requisito do projeto. Cada página (como a `Home` e a de `Detalhes`) é compilada em um "pedaço" de código JavaScript independente. O navegador do usuário baixa apenas o código da página inicial e, quando ele navega para uma nova rota, o código daquela página específica é carregado sob demanda. Isso, combinado com o uso de **Componentes de Servidor** para a busca de dados inicial e **Componentes de Cliente** para toda a interatividade, cria uma experiência de usuário otimizada.
 
-* **Proxy de API (`route.ts`):** Foi criada uma API Route para servir como um proxy para o endpoint de envio de informações. Esta decisão foi tomada para contornar uma restrição de CORS da API externa.
+* **Proxy de API (`route.ts`):** Foi criada uma API Route para servir como um proxy para o endpoint de envio de informações. Essa decisão foi tomada para contornar a restrição de CORS da API externa.
 
 * **Tratamento de dados:** No hook `usePessoas`, os dados retornados pela API sobre pessoas desaparecidas são filtrados e processados para uso direto no frontend. Os filtros aplicados incluem:
 
     * **Filtro de Nome (`startsWith`):**
-        * **Problema:** A API realiza uma busca do tipo "contém" (ex.: buscar por "Ana" também retornava "Mari**ana**").  
-        * **Solução:** No frontend, a lista é refinada para exibir apenas resultados cujo nome **começa com** o termo pesquisado.
+        * **Questão:** A API realiza uma busca do tipo "contém" (ex.: buscar por "Ana" também retornava "Mari**ana**").  
+        * **Implementação:** No frontend, a lista é refinada para exibir apenas resultados cujo nome **começa com** o termo pesquisado.
 
     * **Filtro de Situação (`dataLocalizacao`):**
-        * **Problema:** Ao filtrar por `status=LOCALIZADO`, a API retornava registros de pessoas cujo campo `dataLocalizacao` estava nulo ou vazio.  
-        * **Solução:** Um filtro de segurança garante que uma pessoa só seja considerada "Localizada" se o campo `ultimaOcorrencia.dataLocalizacao` contiver uma data válida.
+        * **Questão:** Ao filtrar por `status=LOCALIZADO`, a API retornava registros de pessoas cujo campo `dataLocalizacao` estava nulo ou vazio.  
+        * **Implementação:** Um filtro de segurança garante que uma pessoa só seja considerada "Localizada" se o campo `ultimaOcorrencia.dataLocalizacao` contiver uma data válida.
 
 ### Análise de Conectividade em Produção e Limitações
 
@@ -129,7 +130,7 @@ A aplicação foi implantada na Vercel com uma pipeline de CI/CD. No entanto, du
 
 **Diagnóstico e Etapas de Depuração:**
 * O erro ocorre apenas no servidor do Vercel, não no desenvolvimento ou produção local, indicando um problema de rede.
-* A região do servidor da Vercel foi alterada para São Paulo (`GRU1`), a mais próxima da API, para minimizar a latência, porém ainda sim persistiu. Sendo ele tratado no route.ts com a utilização do AbortController.
-* **Conclusão:** Por conta do meu plano da vercel ser gratuito, e o servidor mais próximo ser em São Paulo, o tempo de resposta da API excede os 10s e por conta disso não é possível realizar o POST.
+* A região do servidor da Vercel foi alterada para São Paulo (`GRU1`), a mais próxima da API, para minimizar a latência, porém ainda assim persistiu. Sendo ele tratado no `route.ts` com a utilização do `AbortController`.
+* **Conclusão:** Como meu plano da Vercel é gratuito e o servidor mais próximo está em São Paulo, o tempo de resposta da API frequentemente ultrapassa os 10 segundos permitidos pelo plano Hobby, tornando o envio do POST inviável na maior parte das tentativas.
 
 Como resultado, a aplicação em produção pode exibir uma página de erro no carregamento inicial (`error.tsx`) ou notificações de falha, refletindo a falha de comunicação real com o backend.
