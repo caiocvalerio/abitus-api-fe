@@ -78,7 +78,7 @@ export const adicionarInformacaoOcorrencia = async (payload: AdicionarInformacao
             }
         });
 
-        if (response.status !== 200) {
+        if (response.status !== 201) {
             const error = response.data;
             throw new Error("Falha na requisição: \n" + error);
         }
