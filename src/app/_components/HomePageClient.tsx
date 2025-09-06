@@ -14,7 +14,7 @@ import Link from "next/link";
 
 export default function HomePageClient({ initialPageData }: { initialPageData: PagePessoa }): JSX.Element {
     const [currentPage, setCurrentPage] = useState(1);
-    const [filtros, setFiltros] = useState<FiltrosBusca>({});
+    const [filtros, setFiltros] = useState<FiltrosBusca>({ situacao: 'DESAPARECIDO' });
     const [menuAberto, setMenuAberto] = useState(false);
     const { pageData, isLoading: isLoadingPessoas } = usePessoas(filtros, currentPage, initialPageData);
     const { stats, isLoading: isLoadingStats } = useEstatistica();
