@@ -11,17 +11,20 @@ import { NextResponse } from 'next/server';
  * @returns promise que resolve para a resposta da api ou para erro.
  */
 export async function POST(request: Request): Promise<NextResponse> {
+    
+    // Adicionado 9,5s de timeout para tentar a requisição, pois a vercel gratuita tem limite de 10s
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 9500);
+
     try {
         const formData = await request.formData();
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 8000); // 8s de timeout para tentar conseguir enviar a requisição pelo vercel (plano gratuito)
         const ocoId = formData.get('ocoId');
         const informacao = formData.get('informacao');
         const data = formData.get('data');
         const descricao = formData.get('descricao');
         const bodyFormData = new FormData();
         const files = formData.getAll('files');
-        const apiUrl = new URL('https://abitus-api.geia.vip/v1/ocorrencias/informacoes-desaparecido');
+        const apiUrl = new URL(process.env.NEXT_PUBLIC_API_BASE_URL + '/v1/ocorrencias/informacoes-desaparecido');
 
         apiUrl.searchParams.append('ocoId', String(ocoId));
         apiUrl.searchParams.append('informacao', String(informacao));
@@ -35,11 +38,13 @@ export async function POST(request: Request): Promise<NextResponse> {
         }
 
         const start = Date.now();
+
         const apiResponse = await fetch(apiUrl.toString(), {
             method: 'POST',
             body: bodyFormData,
             signal: controller.signal,
         });
+
         clearTimeout(timeout);
         console.log("Tempo total da requisição externa:", Date.now() - start, "ms");
 
@@ -52,7 +57,20 @@ export async function POST(request: Request): Promise<NextResponse> {
         return NextResponse.json(responseData);
 
     } catch (error) {
+        clearTimeout(timeout);
+
+        if (error instanceof DOMException && error.name === 'AbortError') {
+            return NextResponse.json(
+                { message: "A API externa demorou demais para responder. Tente novamente." },
+                { status: 504 }
+            );
+        }
+
         console.error("Erro na API Route:", error);
-        return NextResponse.json({ message: "Erro interno do servidor ao processar a requisição." }, { status: 500 });
+
+        return NextResponse.json(
+            { message: "Erro interno do servidor ao processar a requisição." }, 
+            { status: 500 }
+        );
     }
 }
