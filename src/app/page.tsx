@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getPessoas } from "@/services/pessoaService";
 import HomePageClient from "./_components/HomePageClient";
 import { PagePessoa } from "@/types";
+import LoadingOverlay from "@/components/ui/LoadingOverlay";
 
 export default function Home() {
   const [pageData, setPageData] = useState<PagePessoa | null>(null);
@@ -21,7 +22,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return <LoadingOverlay />;
 
   return <HomePageClient initialPageData={pageData!} />;
 }

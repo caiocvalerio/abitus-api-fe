@@ -93,7 +93,6 @@ export default function PessoaDetalhePage() {
             <InfoPessoais pessoa={pessoa} />
             <InfoOcorrencia ocorrencia={pessoa.ultimaOcorrencia} isLocalizada={isLocalizada} />
             <BotaoAcao onClick={() => setIsModalOpen(true)}>
-              <PlusIcon />
               Tenho uma informação
             </BotaoAcao>
           </div>
