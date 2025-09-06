@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 import { getPessoaById } from "@/services/pessoaService";
 import DetalhesPageClient from "./_components/DetalhesPageClient";
+import { PessoaResumo } from "@/types";
 
 interface PessoaDetalhePageProps {
   params: { id: string };
 }
 
 export default function PessoaDetalhePage({ params }: PessoaDetalhePageProps) {
-  const [pessoa, setPessoa] = useState<any | null>(null);
+  const [pessoa, setPessoa] = useState<PessoaResumo | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
