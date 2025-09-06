@@ -1,4 +1,4 @@
-"use client"; //vercel
+"use client";
 
 import { useEffect, useState } from "react";
 import { getPessoas } from "@/services/pessoaService";
