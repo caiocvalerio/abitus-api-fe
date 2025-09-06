@@ -13,20 +13,21 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request): Promise<NextResponse> {
     try {
         const formData = await request.formData();
-
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 30000); // 30s de timeout para tentar conseguir enviar a requisição pelo vercel
         const ocoId = formData.get('ocoId');
         const informacao = formData.get('informacao');
         const data = formData.get('data');
         const descricao = formData.get('descricao');
-
+        const bodyFormData = new FormData();
+        const files = formData.getAll('files');
         const apiUrl = new URL('https://abitus-api.geia.vip/v1/ocorrencias/informacoes-desaparecido');
+
         apiUrl.searchParams.append('ocoId', String(ocoId));
         apiUrl.searchParams.append('informacao', String(informacao));
         apiUrl.searchParams.append('data', String(data));
         apiUrl.searchParams.append('descricao', String(descricao));
 
-        const bodyFormData = new FormData();
-        const files = formData.getAll('files');
         if (files) {
             files.forEach(file => {
                 bodyFormData.append('files', file);
@@ -36,7 +37,10 @@ export async function POST(request: Request): Promise<NextResponse> {
         const apiResponse = await fetch(apiUrl.toString(), {
             method: 'POST',
             body: bodyFormData,
+            signal: controller.signal,
         });
+
+        clearTimeout(timeout);
 
         if (!apiResponse.ok) {
             const errorData = await apiResponse.text();

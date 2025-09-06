@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/**": {
+      "region": "sao-paulo1"
+    }
+  }
+}

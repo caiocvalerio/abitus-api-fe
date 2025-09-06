@@ -11,7 +11,6 @@ const api: AxiosInstance = axios.create({
     headers: {
         'Content-Type': 'application/json',
     }
-    //timeout: 15000, // retirado para tentar deploy pela vercel
 });
 
 export default api;
