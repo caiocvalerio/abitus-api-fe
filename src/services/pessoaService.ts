@@ -1,6 +1,7 @@
 import { AdicionarInformacaoPayload, EstatisticaPessoaDTO, OcorrenciaInformacao, PagePessoa, PessoaResumo, PessoaSearchParams } from "@/types";
 import api from "./api";
 import axios from "axios";
+import { body } from "framer-motion/client";
 
 export const getPessoas = async (params: PessoaSearchParams): Promise<PagePessoa> => {
     try {
@@ -72,17 +73,18 @@ export const adicionarInformacaoOcorrencia = async (payload: AdicionarInformacao
     }
 
     try {
-        const response = await fetch('/api/informacao', {
-            method: 'POST',
-            body: formData,
+        const response = await api.post('/ocorrencias/informacoes-desaparecido', formData, {
+            headers: {
+                "Content-Type": "multipart/form-data" 
+            }
         });
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Falha na requisição');
+        if (response.status !== 200) {
+            const error = response.data;
+            throw new Error("Falha na requisição: \n" + error);
         }
 
-        return await response.json();
+        return response.data;
 
     } catch (error) {
         console.error("Falha ao adicionar informação:", error);
