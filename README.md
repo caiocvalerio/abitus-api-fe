@@ -124,13 +124,12 @@ Comecei o desenvolvimento seguindo os wireframes, mas à medida que o projeto ev
         * **Questão:** Ao filtrar por `status=LOCALIZADO`, a API retornava registros de pessoas cujo campo `dataLocalizacao` estava nulo ou vazio.  
         * **Implementação:** Criei um filtro de segurança que só considerava alguém como "Localizada" se o campo `ultimaOcorrencia.dataLocalizacao` contivesse uma data válida.  
 
-### Análise de Conectividade em Produção e Limitações
+### Ambiente de produção
 
-A aplicação foi implantada na Vercel com uma pipeline de CI/CD. No entanto, durante o deploy e em tempo de execução, as chamadas de servidor (em Server Components e API Routes) para a API externa (`abitus-api.geia.vip`) falham com erros de `ConnectTimeoutError`.
+A aplicação foi implantada na Vercel utilizando uma pipeline de CI/CD simples. Sempre que ocorre uma atualização na branch `main`, a Vercel executa automaticamente os seguintes comandos:
 
-**Diagnóstico e Etapas de Depuração:**
-* O erro ocorre apenas no servidor do Vercel, não no desenvolvimento ou produção local, indicando um problema de rede.
-* A região do servidor da Vercel foi alterada para São Paulo (`GRU1`), a mais próxima da API, para minimizar a latência, porém ainda assim persistiu. Sendo ele tratado no `route.ts` com a utilização do `AbortController`.
-* **Conclusão:** Como meu plano da Vercel é gratuito e o servidor mais próximo está em São Paulo, o tempo de resposta da API frequentemente ultrapassa os 10 segundos permitidos pelo plano Hobby, tornando o envio do POST inviável na maior parte das tentativas.
+```bash
+    npm test && npm run build
+```
 
-Como resultado, a aplicação em produção pode exibir uma página de erro no carregamento inicial (`error.tsx`) ou notificações de falha, refletindo a falha de comunicação real com o backend.
+Além disso, foi configurada a variável de ambiente referente à API da Abitus no ambiente da Vercel e o servidor foi ajustado para a região de São Paulo, conforme mencionado anteriormente.
