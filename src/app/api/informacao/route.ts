@@ -13,8 +13,8 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request): Promise<NextResponse> {
 
     // Adicionado 9,5s de timeout para tentar a requisição, pois a vercel gratuita tem limite de 10s
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 9500);
+    // const controller = new AbortController();
+    // const timeout = setTimeout(() => controller.abort(), 9500);
 
     try {
         const formData = await request.formData();
@@ -42,10 +42,10 @@ export async function POST(request: Request): Promise<NextResponse> {
         const apiResponse = await fetch(apiUrl.toString(), {
             method: 'POST',
             body: bodyFormData,
-            signal: controller.signal,
+            // signal: controller.signal,
         });
 
-        clearTimeout(timeout);
+        // clearTimeout(timeout);
         console.log("Tempo total da requisição externa:", Date.now() - start, "ms");
 
         if (!apiResponse.ok) {
@@ -57,14 +57,14 @@ export async function POST(request: Request): Promise<NextResponse> {
         return NextResponse.json(responseData);
 
     } catch (error) {
-        clearTimeout(timeout);
+        // clearTimeout(timeout);
 
-        if (error instanceof DOMException && error.name === 'AbortError') {
-            return NextResponse.json(
-                { message: "A API externa demorou demais para responder. Tente novamente." },
-                { status: 504 }
-            );
-        }
+        // if (error instanceof DOMException && error.name === 'AbortError') {
+        //     return NextResponse.json(
+        //         { message: "A API externa demorou demais para responder. Tente novamente." },
+        //         { status: 504 }
+        //     );
+        // }
 
         console.error("Erro na API Route:", error);
 
