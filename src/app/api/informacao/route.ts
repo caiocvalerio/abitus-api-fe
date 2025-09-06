@@ -11,7 +11,7 @@ import { NextResponse } from 'next/server';
  * @returns promise que resolve para a resposta da api ou para erro.
  */
 export async function POST(request: Request): Promise<NextResponse> {
-    
+
     // Adicionado 9,5s de timeout para tentar a requisição, pois a vercel gratuita tem limite de 10s
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 9500);
@@ -69,7 +69,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         console.error("Erro na API Route:", error);
 
         return NextResponse.json(
-            { message: "Erro interno do servidor ao processar a requisição." }, 
+            { message: "Erro interno do servidor ao processar a requisição." },
             { status: 500 }
         );
     }

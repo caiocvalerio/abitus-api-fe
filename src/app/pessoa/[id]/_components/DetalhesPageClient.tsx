@@ -15,7 +15,6 @@ const ArrowLeftIcon = () => (
     </svg>
 );
 
-
 export default function DetalhesPageClient({ pessoa }: { pessoa: PessoaResumo }): JSX.Element {
     const [isModalOpen, setIsModalOpen] = useState(false);
 

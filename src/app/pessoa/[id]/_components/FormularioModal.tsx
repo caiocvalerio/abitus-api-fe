@@ -104,7 +104,7 @@ const FormularioModal = ({ isOpen, onClose, ocoId }: FormularioModalProps): JSX.
                                     value={data}
                                     onChange={(e) => setData(e.target.value)}
                                     required
-                                    max = {hoje}
+                                    max={hoje}
                                     className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>

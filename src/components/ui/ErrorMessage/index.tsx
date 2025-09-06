@@ -10,7 +10,7 @@ const ErrorMessage = ({ message }: ErrorMessageProps): JSX.Element => {
       <strong className="block mb-2 text-lg">Ocorreu um erro</strong>
       <p className="m-0 text-base">{message}</p>
     </div>
-);
+  );
 };
 
 export default ErrorMessage;

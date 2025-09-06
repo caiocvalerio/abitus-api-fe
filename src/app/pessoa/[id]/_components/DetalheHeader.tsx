@@ -9,7 +9,7 @@ interface DetalheHeaderProps {
     tagClasses: string;
 }
 
-const DetalheHeader = ({pessoa, status, tagClasses }: DetalheHeaderProps): JSX.Element => (
+const DetalheHeader = ({ pessoa, status, tagClasses }: DetalheHeaderProps): JSX.Element => (
     <div className="flex flex-col md:flex-row items-center gap-8 border-b border-gray-200 pb-6 mb-6">
         <div className="w-36 h-36 md:w-40 md:h-40 flex-shrink-0">
             <Avatar fotoUrl={pessoa.urlFoto} nome={pessoa.nome ?? 'Desconhecido'} />

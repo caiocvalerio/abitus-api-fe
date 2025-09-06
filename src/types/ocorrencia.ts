@@ -1,7 +1,7 @@
 export interface OcorrenciaCartaz {
     urlCartaz?: string;
-    tipoCartaz?: 'PDF_DESAPARECIDO' | 'PDF_LOCALIZADO' | 
-    'JPG_DESAPARECIDO' | 'JPG_LOCALIZADO' | 
+    tipoCartaz?: 'PDF_DESAPARECIDO' | 'PDF_LOCALIZADO' |
+    'JPG_DESAPARECIDO' | 'JPG_LOCALIZADO' |
     'INSTA_DESAPARECIDO' | 'INSTA_LOCALIZADO';
 }
 

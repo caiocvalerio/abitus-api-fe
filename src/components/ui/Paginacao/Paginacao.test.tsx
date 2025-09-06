@@ -44,7 +44,7 @@ describe('Componente: Paginacao', () => {
         render(<Paginacao totalPages={10} currentPage={1} onPageChange={mockOnPageChange} />);
         const primeiraButton = screen.getByRole('button', { name: /Primeira/i });
         const anteriorButton = screen.getByRole('button', { name: /Anterior/i });
-        
+
         expect(primeiraButton).toBeDisabled();
         expect(anteriorButton).toBeDisabled();
     });

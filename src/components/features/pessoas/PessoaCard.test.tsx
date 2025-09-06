@@ -24,7 +24,7 @@ describe('Componente: PessoaCard', () => {
         expect(screen.getByText('35')).toBeInTheDocument();
         expect(screen.getByText('Desaparecida')).toBeInTheDocument();
     });
-    
+
     /*
      * Objetivo: Testar a renderização de um card para uma pessoa localizada.
      * Verificamos se o nome, a idade e a tag "Localizada" são exibidos.

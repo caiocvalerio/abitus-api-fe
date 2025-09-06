@@ -19,7 +19,6 @@ const mockPageData: PagePessoa = {
     totalPages: 1,
 };
 
-
 describe('Hook: usePessoas', () => {
 
     beforeEach(() => {
@@ -54,7 +53,6 @@ describe('Hook: usePessoas', () => {
 
         expect(mockedGetPessoas).toHaveBeenCalledTimes(1);
     });
-
 
     /*
      * Objetivo: Testar o estado de carregamento.

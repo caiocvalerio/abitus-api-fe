@@ -7,10 +7,10 @@ if (!URL_BASE) {
 }
 
 const api: AxiosInstance = axios.create({
-    baseURL: URL_BASE,
-    headers: {
-        'Content-Type': 'application/json',
-    }
+  baseURL: URL_BASE,
+  headers: {
+    'Content-Type': 'application/json',
+  }
 });
 
 export default api;

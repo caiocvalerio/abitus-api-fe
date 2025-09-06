@@ -24,7 +24,7 @@ const Avatar = ({ fotoUrl, nome }: AvatarProps): JSX.Element => {
             </div>
         );
     }
-    
+
     return (
         <Image
             src={fotoUrl}
