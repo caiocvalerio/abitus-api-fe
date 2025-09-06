@@ -114,7 +114,7 @@ Comecei o desenvolvimento seguindo os wireframes, mas à medida que o projeto ev
 
 * **Proxy de API (`route.ts`):** Foi criada uma API Route para servir como um proxy para o endpoint de envio de informações. Essa decisão foi tomada para contornar a restrição de CORS da API externa.
 
-* **Tratamento de dados:** Inicialmente, implementei no hook `usePessoas` alguns filtros adicionais sobre os dados retornados pela API. A ideia era garantir maior consistência no frontend. No entanto, após refletir, considerei que tais filtros se aproximavam mais de regras de negócio e, portanto, não deveriam ser responsabilidade da camada de apresentação. Ainda assim, deixo registrado que cheguei a desenvolvê-los:  
+* **Tratamento de dados:** Inicialmente, implementei no hook `usePessoas` alguns filtros adicionais sobre os dados retornados pela API. No entanto, após refletir, considerei que tais filtros se aproximavam mais de regras de negócio e, portanto, não deveriam ser responsabilidade da camada de apresentação. Ainda assim, deixo registrado que cheguei a desenvolvê-los:  
 
     * **Filtro de Nome (`startsWith`):**  
         * **Questão:** A API realiza uma busca do tipo "contém" (ex.: buscar por "Ana" também retornava "Mari**ana**").  
