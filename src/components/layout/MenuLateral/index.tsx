@@ -92,7 +92,11 @@ const MenuLateral = (props: PropsMenuLateral): JSX.Element => {
 
                         {/* Botão de Busca Avançada com Divisória */}
                         <div className="w-full border-t border-gray-200 mt-6">
-                            <button onClick={() => setFiltrosVisiveis(!filtrosVisiveis)} className="w-full flex justify-between items-center py-4 text-left font-semibold text-gray-700 hover:text-blue-950 transition-colors">
+                            <button
+                                type="button"
+                                onClick={() => setFiltrosVisiveis(!filtrosVisiveis)}
+                                className="w-full flex justify-between items-center py-4 text-left font-semibold text-gray-700 hover:text-blue-950 transition-colors"
+                            >
                                 Busca Avançada
                                 <ChevronIcon className={clsx("w-4 h-4 transition-transform duration-300", { 'rotate-180': filtrosVisiveis })} />
                             </button>
