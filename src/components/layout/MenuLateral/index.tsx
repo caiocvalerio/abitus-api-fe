@@ -56,7 +56,7 @@ const MenuLateral = (props: PropsMenuLateral): JSX.Element => {
                 "overflow-y-auto",
                 "fixed top-0 left-0 h-full w-[280px] z-50 -translate-x-full",
                 { 'translate-x-0': menuAberto },
-                "lg:relative lg:translate-x-0 lg:h-auto lg:shadow-md lg:overflow-y-visible"
+                "lg:sticky lg:top-0 lg:translate-x-0 lg:h-screen lg:shadow-md lg:overflow-y-auto"
             )}>
                 <form onSubmit={handleFormSubmit} className="flex flex-col w-full h-full">
                     <div className="flex flex-col w-full flex-grow">
