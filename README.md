@@ -133,3 +133,30 @@ A aplicação foi implantada na Vercel utilizando uma pipeline de CI/CD simples.
 ```
 
 Além disso, foi configurada a variável de ambiente referente à API da Abitus no ambiente da Vercel e o servidor foi ajustado para a região de São Paulo, conforme mencionado anteriormente.
+
+
+### Aplicação final
+
+Para registro, em caso da aplicação vercel não estiver mais no ar, aqui encontra-se print das telas desenvolvidas para este desafio, conectada a API disponibilizada.
+
+<div align="center">
+
+**Página Principal**
+<img src="./doc/telas/1.png" width="600px" alt="Pagina Home">
+
+---
+
+**Detalhes Desaparecidos**
+<img src="./doc/telas/2.png" width="600px" alt="Detalhes Desaparecidos">
+
+---
+
+**Detalhes Localizados**
+<img src="./doc/telas/3.png" width="600px" alt="Detalhes Localizados">
+
+---
+
+**Adicionar Informações**
+<img src="./doc/telas/4.png" width="600px" alt="Adicionar Informações">
+
+</div>
