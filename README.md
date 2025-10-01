@@ -142,21 +142,25 @@ Para registro, em caso da aplicação vercel não estiver mais no ar, aqui encon
 <div align="center">
 
 **Página Principal**
+
 <img src="./doc/telas/1.png" width="600px" alt="Pagina Home">
 
 ---
 
 **Detalhes Desaparecidos**
+
 <img src="./doc/telas/2.png" width="600px" alt="Detalhes Desaparecidos">
 
 ---
 
 **Detalhes Localizados**
+
 <img src="./doc/telas/3.png" width="600px" alt="Detalhes Localizados">
 
 ---
 
 **Adicionar Informações**
+
 <img src="./doc/telas/4.png" width="600px" alt="Adicionar Informações">
 
 </div>
